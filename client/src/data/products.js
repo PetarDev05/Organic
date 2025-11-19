@@ -1,0 +1,152 @@
+export const products = [
+  // Fruits
+  {
+    name: "Apple",
+    category: "fruits",
+    price: 1.49,
+    rating: 4,
+    image: "/apples.png",
+    about: ["Freshly picked", "Sweet taste", "Crispy texture"],
+    _id: "001"
+  },
+  {
+    name: "Banana",
+    category: "fruits",
+    price: 0.99,
+    rating: 5,
+    image: "/bananas.png",
+    about: ["Naturally sweet", "Soft inside", "Great snack"],
+    _id: "002"
+  },
+  {
+    name: "Orange",
+    category: "fruits",
+    price: 1.29,
+    rating: 4,
+    image: "/oranges.png",
+    about: ["Rich in vitamin C", "Fresh citrus", "Juicy inside"],
+    _id: "003"
+  },
+  {
+    name: "Strawberries",
+    category: "fruits",
+    price: 3.99,
+    rating: 5,
+    image: "/strawberries.png",
+    about: ["Bright color", "Strong flavor", "Freshly packed"],
+    _id: "004"
+  },
+  {
+    name: "Grapes",
+    category: "fruits",
+    price: 2.49,
+    rating: 4,
+    image: "/grapes.png",
+    about: ["Sweet berries", "Soft skin", "Naturally juicy"],
+    _id: "005"
+  },
+  {
+    name: "Pineapple",
+    category: "fruits",
+    price: 2.99,
+    rating: 4,
+    image: "/pineapple.png",
+    about: ["Tropical aroma", "Sweet-sour taste", "Rich flavor"],
+    _id: "006"
+  },
+
+  // Vegetables
+  {
+    name: "Tomato",
+    category: "vegetables",
+    price: 1.19,
+    rating: 4,
+    image: "/tomatoes.webp",
+    about: ["Freshly harvested", "Soft texture", "Mild taste"],
+    _id: "007"
+  },
+  {
+    name: "Potato",
+    category: "vegetables",
+    price: 0.79,
+    rating: 5,
+    image: "/potatoes.png",
+    about: ["Multi-purpose", "Long lasting", "Neutral flavor"],
+    _id: "008"
+  },
+  {
+    name: "Carrot",
+    category: "vegetables",
+    price: 0.89,
+    rating: 4,
+    image: "/carrots.png",
+    about: ["Crunchy texture", "Naturally sweet", "High in fiber"],
+    _id: "009"
+  },
+  {
+    name: "Cucumber",
+    category: "vegetables",
+    price: 1.09,
+    rating: 4,
+    image: "/cucumber.png",
+    about: ["Refreshing taste", "Light flavor", "Low calorie"],
+    _id: "010"
+  },
+  {
+    name: "Broccoli",
+    category: "vegetables",
+    price: 2.29,
+    rating: 5,
+    image: "/brocoli.png",
+    about: ["Green florets", "Nutrient rich", "Fresh texture"],
+    _id: "011"
+  },
+  {
+    name: "Onion",
+    category: "vegetables",
+    price: 0.69,
+    rating: 4,
+    image: "/onions.png",
+    about: ["Strong aroma", "Universal use", "Stays fresh long"],
+    _id: "012"
+  },
+];
+
+export const FavoriteProducts = [
+  {
+    name: "Apple",
+    category: "fruits",
+    price: 1.49,
+    rating: 4,
+    image: "/apples.png",
+    about: ["Freshly picked", "Sweet taste", "Crispy texture"],
+    _id: "001"
+  },
+  {
+    name: "Pineapple",
+    category: "fruits",
+    price: 2.99,
+    rating: 4,
+    image: "/pineapple.png",
+    about: ["Tropical aroma", "Sweet-sour taste", "Rich flavor"],
+    _id: "006"
+  },
+  {
+    name: "Tomato",
+    category: "vegetables",
+    price: 1.19,
+    rating: 4,
+    image: "/tomatoes.webp",
+    about: ["Freshly harvested", "Soft texture", "Mild taste"],
+    _id: "007"
+  },
+  {
+    name: "Onion",
+    category: "vegetables",
+    price: 0.69,
+    rating: 4,
+    image: "/onions.png",
+    about: ["Strong aroma", "Universal use", "Stays fresh long"],
+    _id: "012"
+  },
+];
