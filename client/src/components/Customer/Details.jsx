@@ -6,26 +6,27 @@ import { useAppContext } from "../../context/AppContext";
 
 // icons
 import { FaRegDotCircle } from "react-icons/fa";
+import { useEffect, useState } from "react";
 
-const Details = () => {
-  const { id } = useParams();
-  const { allProducts, cartProducts } = useAppContext();
+const Details = ({ product }) => {
 
-  const product = allProducts.find((item) => item._id === id);
+  // const addToCart = async () => {
+  //   cartProducts.push(product);
+  // };
 
-  const addToCart = async () => {
-    cartProducts.push(product);
-  };
+  if (!product) {
+    return (
+      <div className="w-full min-h-[70vh] flex items-center justify-center">
+        <p className="text-(--text)">Loading...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="w-full min-h-[70vh] flex items-center justify-center py-10">
-      <div className="w-[300px] min-[500px]:w-[450px] lg:w-fit xl:w-[850px] flex flex-col lg:flex-row  items-start gap-7 ">
+      <div className="w-[300px] min-[500px]:w-[450px] lg:w-[900px] flex flex-col lg:flex-row  items-start gap-7 ">
         <div className="aspect-square w-full border border-(--details-border) flex items-center justify-center">
-          <img
-            src={product.image}
-            alt=""
-            className=""
-          />
+          <img src={product.image} alt="" className="" />
         </div>
         <div className="w-full flex flex-col items-start justify-center gap-5 px-3">
           <div className="">
@@ -94,7 +95,7 @@ const Details = () => {
           </div>
           <div className="w-full flex flex-row items-center gap-5">
             <button
-              onClick={addToCart}
+              // onClick={addToCart}
               className="text-(--text) flex-1 py-3 bg-(--button-gray-light) text-center "
             >
               Add to cart

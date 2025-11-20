@@ -23,6 +23,10 @@ const productsSchema = new mongoose.Schema(
       required: true,
     },
     about: [{ type: String, required: true }],
+    bestSelling: {
+      type: Boolean,
+      required: true,
+    },
   },
   { timestamps: true }
 );

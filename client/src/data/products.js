@@ -7,7 +7,7 @@ export const products = [
     rating: 4,
     image: "/apples.png",
     about: ["Freshly picked", "Sweet taste", "Crispy texture"],
-    _id: "001"
+    _id: "001",
   },
   {
     name: "Banana",
@@ -16,7 +16,7 @@ export const products = [
     rating: 5,
     image: "/bananas.png",
     about: ["Naturally sweet", "Soft inside", "Great snack"],
-    _id: "002"
+    _id: "002",
   },
   {
     name: "Orange",
@@ -25,7 +25,7 @@ export const products = [
     rating: 4,
     image: "/oranges.png",
     about: ["Rich in vitamin C", "Fresh citrus", "Juicy inside"],
-    _id: "003"
+    _id: "003",
   },
   {
     name: "Strawberries",
@@ -34,7 +34,7 @@ export const products = [
     rating: 5,
     image: "/strawberries.png",
     about: ["Bright color", "Strong flavor", "Freshly packed"],
-    _id: "004"
+    _id: "004",
   },
   {
     name: "Grapes",
@@ -43,7 +43,7 @@ export const products = [
     rating: 4,
     image: "/grapes.png",
     about: ["Sweet berries", "Soft skin", "Naturally juicy"],
-    _id: "005"
+    _id: "005",
   },
   {
     name: "Pineapple",
@@ -52,7 +52,7 @@ export const products = [
     rating: 4,
     image: "/pineapple.png",
     about: ["Tropical aroma", "Sweet-sour taste", "Rich flavor"],
-    _id: "006"
+    _id: "006",
   },
 
   // Vegetables
@@ -63,7 +63,7 @@ export const products = [
     rating: 4,
     image: "/tomatoes.webp",
     about: ["Freshly harvested", "Soft texture", "Mild taste"],
-    _id: "007"
+    _id: "007",
   },
   {
     name: "Potato",
@@ -72,7 +72,7 @@ export const products = [
     rating: 5,
     image: "/potatoes.png",
     about: ["Multi-purpose", "Long lasting", "Neutral flavor"],
-    _id: "008"
+    _id: "008",
   },
   {
     name: "Carrot",
@@ -81,7 +81,7 @@ export const products = [
     rating: 4,
     image: "/carrots.png",
     about: ["Crunchy texture", "Naturally sweet", "High in fiber"],
-    _id: "009"
+    _id: "009",
   },
   {
     name: "Cucumber",
@@ -90,7 +90,7 @@ export const products = [
     rating: 4,
     image: "/cucumber.png",
     about: ["Refreshing taste", "Light flavor", "Low calorie"],
-    _id: "010"
+    _id: "010",
   },
   {
     name: "Broccoli",
@@ -99,7 +99,7 @@ export const products = [
     rating: 5,
     image: "/brocoli.png",
     about: ["Green florets", "Nutrient rich", "Fresh texture"],
-    _id: "011"
+    _id: "011",
   },
   {
     name: "Onion",
@@ -108,7 +108,7 @@ export const products = [
     rating: 4,
     image: "/onions.png",
     about: ["Strong aroma", "Universal use", "Stays fresh long"],
-    _id: "012"
+    _id: "012",
   },
 ];
 
