@@ -2,7 +2,6 @@
 import { createContext, useContext, useState } from "react";
 
 // react-router-dom
-import { useNavigate } from "react-router-dom";
 
 // data
 import { products } from "../data/products.js";
@@ -12,29 +11,51 @@ import { useReducer } from "react";
 export const AppContext = createContext();
 
 export const AppContextProvider = ({ children }) => {
-  const productsReducer = (state, action) => {
+  const productsReducer = (productsState, action) => {
     switch (action.type) {
       case "GET_ALL_PRODUCTS":
         return {
           products: action.payload,
         };
       default:
-        return state;
+        return productsState;
     }
   };
 
-  const navigate = useNavigate();
+  const userReducer = (userState, action) => {
+    switch (action.type) {
+      
+      case "LOGIN":
+        return {
+          user: action.payload,
+        };
+      case "EXTEND_SESSION":
+        return {
+          user: action.payload,
+        };
+      case "LOGOUT":
+        return {
+          user: null,
+        };
+      default:
+        return userState;
+    }
+  };
+
   const [user, setUser] = useState(true);
   const [isSeller, setIsSeller] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
   const [allProducts, setAllProducts] = useState(products);
-  const [state, dispatch] = useReducer(productsReducer, { products: [] });
+  const [productsState, dispatchProducts] = useReducer(productsReducer, {
+    products: [],
+  });
+  const [loadingUser, setLoadingUser] = useState(true);
+  const [userState, dispatchUser] = useReducer(userReducer, { user: null });
   const [allFavoriteProducts, setAllFavoriteProducts] =
     useState(FavoriteProducts);
   const [cartProducts, setCartProducts] = useState(cart);
 
   const value = {
-    navigate,
     user,
     setUser,
     isSeller,
@@ -47,8 +68,12 @@ export const AppContextProvider = ({ children }) => {
     setAllFavoriteProducts,
     cartProducts,
     setCartProducts,
-    ...state,
-    dispatch,
+    ...productsState,
+    dispatchProducts,
+    ...userState,
+    dispatchUser,
+    loadingUser,
+    setLoadingUser,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

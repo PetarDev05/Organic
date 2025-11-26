@@ -3,22 +3,35 @@ import NavBarSideBar from "../components/Seller/NavBarSideBar.jsx";
 import ProductList from "../components/Seller/ProductList.jsx";
 import NewProductForm from "../components/Seller/NewProductForm.jsx";
 import OrderList from "../components/Seller/OrderList.jsx";
+import LoginForm from "../components/Universal/LoginForm.jsx";
+import Loading from "../components/Universal/Loading.jsx";
 
 // react-router-dom
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Outlet, Navigate } from "react-router-dom";
+
+// context
+import { useAppContext } from "../context/AppContext.jsx";
 
 const SellerLayout = () => {
-  return (
-    <div className="">
-      <NavBarSideBar />
+  const { showLogin, user, loadingUser } = useAppContext();
 
-      <div className="pt-20 pl-22 md:pl-70">
-        <Routes>
-          <Route path="/seller" element={<ProductList />} />
-          <Route path="/seller/new" element={<NewProductForm />} />
-          <Route path="/seller/orders" element={<OrderList />} />
-        </Routes>
-      </div>
+  if (loadingUser) {
+    return <Loading />;
+  }
+
+  return (
+    <div>
+      {!user || user?.person?.role !== "admin" ? (
+        <Navigate to="/" />
+      ) : (
+        <>
+          {showLogin && <LoginForm />}
+          <NavBarSideBar />
+          <div className="pt-20 pl-22 md:pl-70">
+            <Outlet />
+          </div>
+        </>
+      )}
     </div>
   );
 };

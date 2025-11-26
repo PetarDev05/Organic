@@ -10,9 +10,6 @@ import { useEffect, useState } from "react";
 
 const Details = ({ product }) => {
 
-  // const addToCart = async () => {
-  //   cartProducts.push(product);
-  // };
 
   if (!product) {
     return (
@@ -95,7 +92,6 @@ const Details = ({ product }) => {
           </div>
           <div className="w-full flex flex-row items-center gap-5">
             <button
-              // onClick={addToCart}
               className="text-(--text) flex-1 py-3 bg-(--button-gray-light) text-center "
             >
               Add to cart

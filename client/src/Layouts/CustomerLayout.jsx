@@ -10,7 +10,6 @@ import ProductDetails from "../pages/ProductDetails.jsx";
 import AddressForm from "../pages/ShippingAddress.jsx";
 import Checkout from "../pages/Checkout.jsx";
 import Orders from "../pages/Orders.jsx";
-
 // react-router-dom
 import { Routes, Route } from "react-router-dom";
 
@@ -20,7 +19,7 @@ const CustomerLayout = () => {
       <NavBar />
 
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/products" element={<Shop />} />
         <Route path="/details/:id" element={<ProductDetails />} />

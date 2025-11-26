@@ -1,16 +1,11 @@
 // react-router-dom
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 
 // components
 import PaymentTabs from "../components/Customer/PaymentTabs.jsx";
 
 const Checkout = () => {
-  const navigate = useNavigate();
 
-  const handlePayment = async () => {
-    navigate("/orders")
-  };
 
   return (
     <div className="w-full px-10 flex flex-col items-center justify-center min-h-[65vh] gap-10 py-20">
@@ -52,12 +47,11 @@ const Checkout = () => {
             placeholder="CVV"
           />
         </div>
-        <button
-          onClick={handlePayment}
+        <Link to="/cart"
           className="w-full py-3 cursor-pointer bg-(--primary) text-white font-medium hover:bg-(--primary-darker) transition rounded-sm"
         >
           Place order
-        </button>
+        </Link>
       </form>
     </div>
   );

@@ -4,16 +4,26 @@ import { Link, NavLink } from "react-router-dom";
 // icons
 import { ImLeaf } from "react-icons/im";
 
+// notifications
+import { toast, Toaster } from "react-hot-toast";
+
+// context
+import { useAppContext } from "../../context/AppContext.jsx";
+
 // components
 import { HiOutlineRocketLaunch } from "react-icons/hi2";
 import { LuCircleFadingPlus } from "react-icons/lu";
 import { PiPackageBold } from "react-icons/pi";
+import { useState } from "react";
+
+const notify = (message) => toast(message);
 
 const NavBarSideBar = () => {
+  const { user, dispatchUser, setShowLogin, navigate, cartProducts } =
+    useAppContext();
+
   const dashboardIcon = <HiOutlineRocketLaunch className="text-2xl" />;
-
   const newProductsIcon = <LuCircleFadingPlus className="text-2xl" />;
-
   const orderIcon = <PiPackageBold className="text-2xl" />;
 
   const sidebarLinks = [
@@ -21,6 +31,18 @@ const NavBarSideBar = () => {
     { name: "New Product", path: "/seller/new", icon: newProductsIcon },
     { name: "Orders List", path: "/seller/orders", icon: orderIcon },
   ];
+
+  const handleLogout = async () => {
+    const url = "http://localhost:8000/api/users/logout";
+    const options = {
+      method: "POST",
+      credentials: "include",
+    };
+    const response = await fetch(url, options);
+    const json = await response.json();
+    dispatchUser({ type: "LOGOUT" });
+    notify(json.message);
+  };
 
   return (
     <>
@@ -34,26 +56,30 @@ const NavBarSideBar = () => {
         </NavLink>
         <div className="flex items-center gap-5 text-gray-500">
           <p className="max-sm:hidden">Hi! Admin</p>
-          <button className="cursor-pointer px-5 py-1.5 sm:px-8 sm:py-2 bg-(--primary) hover:bg-(--primary-darker) transition text-white rounded-full">
+          <Link
+            to="/"
+            onClick={handleLogout}
+            className="cursor-pointer px-5 py-1.5 sm:px-8 sm:py-2 bg-(--primary) hover:bg-(--primary-darker) transition text-white rounded-full"
+          >
             Log out
-          </button>
+          </Link>
         </div>
       </div>
       <div className="fixed h-screen pt-20 z-10 md:w-64 w-16 border-r  text-base border-gray-300 flex flex-col transition-all duration-300">
         {sidebarLinks.map((item, index) => (
-          <Link
+          <NavLink
             to={item.path}
             key={index}
-            className={`flex items-center py-3 px-4 gap-3 
-            ${
-              index === 0
-                ? "border-r-4 md:border-r-[6px] bg-(--light-green) border-(--primary) text-(--primary)"
-                : "hover:bg-gray-100/90 border-white text-gray-700"
-            }`}
+            end
+            className={({ isActive }) =>
+              `flex items-center py-3 px-4 gap-3 border-white text-gray-700 border-r-4 md:border-r-[6px] ${
+                isActive ? "bg-(--light-green) border-r-(--primary)" : ""
+              }`
+            }
           >
             {item.icon}
             <p className="md:block hidden text-center">{item.name}</p>
-          </Link>
+          </NavLink>
         ))}
       </div>
     </>

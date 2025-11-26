@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 
 // Routers
 import productsRouter from "./src/routes/products.routes.js";
+import usersRouter from "./src/routes/users.routes.js"
 
 export const app = express();
 
@@ -31,3 +32,4 @@ app.use((req, res, next) => {
 
 // Routing
 app.use("/api/products", productsRouter);
+app.use("/api/users", usersRouter);

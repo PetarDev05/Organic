@@ -1,9 +1,8 @@
-// context
-import { useAppContext } from "../context/AppContext.jsx";
-
 const useAuthFetch = () => {
-  const { dispatch: dispatchProducts } = useAppContext();
   const authFetch = async (url, options = {}) => {
+    if (options) {
+      options.credentials = "include"
+    }
     const response = await fetch(url, options);
     const json = await response.json();
     if (!response.ok) {

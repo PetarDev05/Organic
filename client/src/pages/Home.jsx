@@ -9,13 +9,13 @@ import Features from "../components/Customer/Features.jsx";
 import { useAppContext } from "../context/AppContext.jsx";
 
 const Home = () => {
-  const { allProducts } = useAppContext();
+  const { user } = useAppContext();
 
   return (
     <div className="w-full px-5 py-10 flex flex-col items-center gap-15">
       <MainBanner />
       <SmallBanner />
-      <BestSellers />
+      {user && <BestSellers />}
       <Features />
       <Newsletter />
     </div>

@@ -6,12 +6,8 @@ import ProductCard from "../components/Customer/ProductCard.jsx";
 import { useAppContext } from "../context/AppContext.jsx";
 import { useEffect } from "react";
 
-// hooks
-import useAuthFetch from "../hooks/useAuthFetch.jsx";
-
 const Shop = () => {
-  const { products, dispatch: dispatchProducts } = useAppContext();
-  const authFetch = useAuthFetch();
+  const { products } = useAppContext();
 
   return (
     <div className="w-full min-h-[65vh] flex flex-col items-center justify-start gap-10 px-10 py-20">
