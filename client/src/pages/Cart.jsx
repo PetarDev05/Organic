@@ -1,5 +1,5 @@
 // react
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // react-router-dom
 import { Link } from "react-router-dom";
@@ -8,14 +8,20 @@ import { useNavigate } from "react-router-dom";
 // icons
 import { GoArrowLeft } from "react-icons/go";
 
-// context
+// notifications
+import { toast } from "react-hot-toast";
+
+// hooks
 import { useAppContext } from "../context/AppContext.jsx";
+import useAuthFetch from "../hooks/useAuthFetch.jsx";
+
+const notify = (message) => toast(message);
 
 const Cart = () => {
   const [showAddress, setShowAddress] = useState(false);
   const [online, setOnline] = useState("Place Order");
-
-  const { cartProducts } = useAppContext();
+  const authFetch = useAuthFetch();
+  const { user, cartProducts, setCartProducts } = useAppContext();
 
   const navigate = useNavigate();
 
@@ -25,6 +31,45 @@ const Cart = () => {
       ? setOnline("Place Order")
       : setOnline("Proceed to checkout");
   };
+
+  const getCart = async () => {
+    const url = `http://localhost:8000/api/products/${user.person._id}`;
+    const options = {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    };
+    const json = await authFetch(url, options);
+    setCartProducts(json.data.cart);
+  };
+
+  const removeFromCart = async (productId) => {
+    console.log("Product id: ",productId);
+    console.log("User id: ", user.person._id);
+
+    const url = `http://localhost:8000/api/products/cart/${user.person._id}`;
+    const options = {
+      method: "PATCH",
+      body: JSON.stringify({ productId }),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    };
+    const data = await authFetch(url, options);
+    notify(data.message);
+    console.log(data);
+    const newCart = cartProducts.filter((item) => item._id !== productId);
+    setCartProducts(newCart);
+  };
+
+  useEffect(() => {
+    if (!user || !user.person._id) {
+      return;
+    }
+
+    getCart();
+  }, [user]);
 
   const handlePayment = async () => {
     if (online === "Place Order") {
@@ -59,30 +104,24 @@ const Cart = () => {
               <div className="cursor-pointer w-24 h-24 flex items-center justify-center border border-gray-300 rounded overflow-hidden">
                 <img
                   className="max-w-full h-full object-cover"
-                  src={product.image}
-                  alt={product.name}
+                  src={product.productId.image}
+                  alt={product.productId.name}
                 />
               </div>
               <div>
                 <p className="hidden md:block font-semibold">{product.name}</p>
                 <div className="font-normal text-gray-500/70">
                   <div className="flex items-center">
-                    <p>Qty:</p>
-                    <select className="outline-none">
-                      {Array(5)
-                        .fill("")
-                        .map((_, index) => (
-                          <option key={index} value={index + 1}>
-                            {index + 1}
-                          </option>
-                        ))}
-                    </select>
+                    <p>Qty: {product.quantity}</p>
                   </div>
                 </div>
               </div>
             </div>
-            <p className="text-center">${product.price}</p>
-            <button className="cursor-pointer mx-auto">
+            <p className="text-center">${product.productId.price}</p>
+            <button
+              onClick={() => removeFromCart(product._id)}
+              className="cursor-pointer mx-auto"
+            >
               <svg
                 width="20"
                 height="20"

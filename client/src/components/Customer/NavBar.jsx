@@ -8,7 +8,7 @@ import { RiMenu3Fill } from "react-icons/ri";
 import { useState } from "react";
 import { NavLink, Link } from "react-router-dom";
 
-// context
+// hooks
 import { useAppContext } from "../../context/AppContext.jsx";
 
 // dependencies
@@ -17,7 +17,7 @@ import toast from "react-hot-toast";
 const notify = (message) => toast(message);
 
 const NavBar = () => {
-  const { user, dispatchUser, setShowLogin, navigate, cartProducts } =
+  const { user, dispatchUser, setShowLogin, cartProducts } =
     useAppContext();
   const [open, setOpen] = useState(false);
 
@@ -135,7 +135,7 @@ const NavBar = () => {
         } absolute top-[60px] left-0 w-full bg-white shadow-md flex-col items-start gap-2 text-sm md:hidden`}
       >
         {user && (
-          <div className="">
+          <div className="w-full">
             <NavLink
               onClick={() => (open ? setOpen(false) : setOpen(true))}
               to="/"

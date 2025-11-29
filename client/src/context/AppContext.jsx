@@ -6,7 +6,6 @@ import { createContext, useContext, useState } from "react";
 // data
 import { products } from "../data/products.js";
 import { FavoriteProducts } from "../data/products.js";
-import { cart } from "../data/cart.js";
 import { useReducer } from "react";
 export const AppContext = createContext();
 
@@ -24,7 +23,6 @@ export const AppContextProvider = ({ children }) => {
 
   const userReducer = (userState, action) => {
     switch (action.type) {
-      
       case "LOGIN":
         return {
           user: action.payload,
@@ -53,7 +51,7 @@ export const AppContextProvider = ({ children }) => {
   const [userState, dispatchUser] = useReducer(userReducer, { user: null });
   const [allFavoriteProducts, setAllFavoriteProducts] =
     useState(FavoriteProducts);
-  const [cartProducts, setCartProducts] = useState(cart);
+  const [cartProducts, setCartProducts] = useState([]);
 
   const value = {
     user,
@@ -66,14 +64,14 @@ export const AppContextProvider = ({ children }) => {
     setAllProducts,
     allFavoriteProducts,
     setAllFavoriteProducts,
-    cartProducts,
-    setCartProducts,
     ...productsState,
     dispatchProducts,
     ...userState,
     dispatchUser,
     loadingUser,
     setLoadingUser,
+    cartProducts,
+    setCartProducts,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

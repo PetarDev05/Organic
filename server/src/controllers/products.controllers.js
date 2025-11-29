@@ -78,3 +78,63 @@ export const addProductToCart = async (req, res) => {
     });
   }
 };
+
+export const getAllCartProducts = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(userId)) {
+      return res.status(404).json({
+        message: "Product not found",
+      });
+    }
+
+    const cart = await User.findOne({ _id: userId })
+      .select("cart")
+      .populate("cart.productId");
+
+    res.status(200).json({
+      message: "cart products",
+      data: cart,
+    });
+  } catch (error) {
+    res.status(400).json({
+      message: error.message,
+    });
+    console.log(error.message);
+  }
+};
+
+export const removeFromCart = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const { productId } = req.body;
+
+    console.log("userId: ", userId);
+    console.log("productId: ", productId);
+    if (
+      !mongoose.Types.ObjectId.isValid(userId) ||
+      !mongoose.Types.ObjectId.isValid(productId)
+    ) {
+      return res.status(404).json({
+        message: "Product not found",
+      });
+    }
+
+    const user = await User.findByIdAndUpdate(
+      userId,
+      {
+        $pull: { cart: { _id: productId } },
+      },
+      { new: true }
+    );
+
+    res.status(200).json({
+      message: "Item removed from cart",
+      user,
+    });
+  } catch (error) {
+    res.status(400).json({
+      message: error.message,
+    });
+  }
+};

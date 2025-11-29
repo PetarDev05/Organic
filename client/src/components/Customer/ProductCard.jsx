@@ -95,7 +95,7 @@ const ProductCard = ({ product }) => {
             ${product.price}
           </p>
           <div className="text-(--primary) flex flex-row items-center gap-2">
-            <div className="flex items-center justify-center gap-2 md:w-20 w-16 h-[34px] rounded select-none">
+            <div className="flex items-center justify-center w-16 h-[34px] rounded select-none">
               <button
                 onClick={() => setCount((prev) => Math.max(prev - 1, 0))}
                 className="cursor-pointer text-md px-2 h-full"
@@ -111,7 +111,7 @@ const ProductCard = ({ product }) => {
               </button>
             </div>
             <button
-              className="flex items-center justify-center gap-1 bg-(--light-green) border border-(--primary) md:w-20 w-16 h-[34px] rounded text-(--primary) font-medium"
+              className="flex items-center justify-center gap-1 bg-(--light-green) border border-(--primary) w-16 h-[34px] rounded text-(--primary) font-medium"
               onClick={addToCart}
             >
               <svg
