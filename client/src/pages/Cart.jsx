@@ -21,7 +21,7 @@ const Cart = () => {
   const [showAddress, setShowAddress] = useState(false);
   const [online, setOnline] = useState("Place Order");
   const authFetch = useAuthFetch();
-  const { user, cartProducts, setCartProducts } = useAppContext();
+  const { user, cartProducts, setCartProducts, address } = useAppContext();
 
   const navigate = useNavigate();
 
@@ -72,11 +72,7 @@ const Cart = () => {
   }, [user]);
 
   const handlePayment = async () => {
-    if (online === "Place Order") {
-      navigate("/orders");
-    } else {
-      navigate("/checkout");
-    }
+    
   };
 
   return (
@@ -158,7 +154,7 @@ const Cart = () => {
           <div className="mb-6">
             <p className="text-sm font-medium uppercase">Delivery Address</p>
             <div className="relative flex justify-between items-start mt-2">
-              <p className="text-gray-500">No address found</p>
+              <p className="text-gray-500">{address.street ? `${address.street}` : "No address found"}</p>
               <button
                 onClick={() => setShowAddress(!showAddress)}
                 className="text-(--primary) hover:underline cursor-pointer"
@@ -171,7 +167,7 @@ const Cart = () => {
                     onClick={() => setShowAddress(false)}
                     className="text-gray-500 p-2 hover:bg-gray-100"
                   >
-                    New York, USA
+                    {address.firstName}
                   </p>
                   <Link to="/address">
                     <p

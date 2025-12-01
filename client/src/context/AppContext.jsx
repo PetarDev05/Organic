@@ -52,6 +52,16 @@ export const AppContextProvider = ({ children }) => {
   const [allFavoriteProducts, setAllFavoriteProducts] =
     useState(FavoriteProducts);
   const [cartProducts, setCartProducts] = useState([]);
+  const [address, setAddress] = useState({
+    firstName: "",
+    lastName: "",
+    street: "",
+    city: "",
+    state: "",
+    postalCode: "",
+    country: "",
+    phone: "",
+  });
 
   const value = {
     user,
@@ -72,6 +82,8 @@ export const AppContextProvider = ({ children }) => {
     setLoadingUser,
     cartProducts,
     setCartProducts,
+    address,
+    setAddress,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

@@ -1,15 +1,36 @@
 // react-router-dom
 import { Link, useParams } from "react-router-dom";
 
-// context
+// hooks
 import { useAppContext } from "../../context/AppContext";
+import useAuthFetch from "../../hooks/useAuthFetch";
 
 // icons
 import { FaRegDotCircle } from "react-icons/fa";
 import { useEffect, useState } from "react";
 
-const Details = ({ product }) => {
+// notifications
+import { toast } from "react-hot-toast";
 
+const notify = (message) => toast(message);
+
+const Details = ({ product }) => {
+  const { user } = useAppContext();
+  const authFetch = useAuthFetch();
+
+  const addToCart = async () => {
+    const url = `http://localhost:8000/api/products/${user.person._id}`;
+    const options = {
+      method: "PATCH",
+      body: JSON.stringify({ productId: product._id, quantity: 1 }),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    };
+
+    const data = await authFetch(url, options);
+    notify(data.message);
+  };
 
   if (!product) {
     return (
@@ -92,12 +113,14 @@ const Details = ({ product }) => {
           </div>
           <div className="w-full flex flex-row items-center gap-5">
             <button
+              onClick={addToCart}
               className="text-(--text) flex-1 py-3 bg-(--button-gray-light) text-center "
             >
               Add to cart
             </button>
             <Link
               to="/cart"
+              onClick={addToCart}
               className="text-(--white) flex-1 py-3 bg-(--primary) text-center"
             >
               Buy now

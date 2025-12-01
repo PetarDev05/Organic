@@ -8,7 +8,6 @@ import Cart from "../pages/Cart.jsx";
 import Shop from "../pages/Shop.jsx";
 import ProductDetails from "../pages/ProductDetails.jsx";
 import AddressForm from "../pages/ShippingAddress.jsx";
-import Checkout from "../pages/Checkout.jsx";
 import Orders from "../pages/Orders.jsx";
 // react-router-dom
 import { Routes, Route } from "react-router-dom";
@@ -25,7 +24,6 @@ const CustomerLayout = () => {
         <Route path="/details/:id" element={<ProductDetails />} />
         <Route path="/orders" element={<Orders />} />
         <Route path="/address" element={<AddressForm />} />
-        <Route path="/checkout" element={<Checkout />} />
       </Routes>
 
       <Footer />
