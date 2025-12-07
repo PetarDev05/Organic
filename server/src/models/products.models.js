@@ -11,7 +11,7 @@ const productsSchema = new mongoose.Schema(
       required: true,
     },
     price: {
-      type: String,
+      type: Number,
       required: true,
     },
     rating: {
@@ -23,10 +23,14 @@ const productsSchema = new mongoose.Schema(
       required: true,
     },
     about: [{ type: String, required: true }],
-    bestSelling: {
+    best: {
       type: Boolean,
       required: true,
     },
+    inStock: {
+      type: Boolean,
+      required: true
+    }
   },
   { timestamps: true }
 );

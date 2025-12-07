@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 
 export const getAllProducts = async (req, res) => {
   try {
-    const products = await Product.find();
+    const products = await Product.find({ inStock: true });
     res.status(200).json({
       message: "Products fetched successfully",
       dispatchValue: products,
@@ -16,9 +16,23 @@ export const getAllProducts = async (req, res) => {
   }
 };
 
+export const getAllAdminProducts = async (req, res) => {
+  try {
+    const products = await Product.find();
+    res.status(200).json({
+      message: "Products fetched successfully",
+      products,
+    });
+  } catch (error) {
+    res.status(400).json({
+      message: error.message,
+    });
+  }
+};
+
 export const createNewProduct = async (req, res) => {
   try {
-    const { name, category, price, rating, image, about, bestSelling } =
+    const { name, category, price, rating, image, about, best, inStock } =
       req.body;
     const newProduct = await Product.create({
       name,
@@ -27,11 +41,29 @@ export const createNewProduct = async (req, res) => {
       rating,
       image,
       about,
-      bestSelling,
+      best,
+      inStock,
     });
     res.status(200).json({
       message: "New product created successfully",
       dispatchValue: newProduct,
+    });
+  } catch (error) {
+    res.status(400).json({
+      message: error.message,
+    });
+  }
+};
+
+export const manipulateStock = async (req, res) => {
+  try {
+    const { productId } = req.params;
+    const updated = await Product.findOne({ _id: productId });
+    updated.inStock = !updated.inStock;
+    await updated.save();
+    res.status(200).json({
+      message: "Stock updated successfully",
+      updated,
     });
   } catch (error) {
     res.status(400).json({

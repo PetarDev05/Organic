@@ -21,6 +21,10 @@ export const AppContextProvider = ({ children }) => {
     }
   };
 
+  const ordersReducer = () => {
+
+  }
+
   const userReducer = (userState, action) => {
     switch (action.type) {
       case "LOGIN":
@@ -47,8 +51,10 @@ export const AppContextProvider = ({ children }) => {
   const [productsState, dispatchProducts] = useReducer(productsReducer, {
     products: [],
   });
+  const [adminProducts, setAdminProducts] = useState([]);
   const [loadingUser, setLoadingUser] = useState(true);
   const [userState, dispatchUser] = useReducer(userReducer, { user: null });
+  const [orders, setOrders] = useState([]);
   const [allFavoriteProducts, setAllFavoriteProducts] =
     useState(FavoriteProducts);
   const [cartProducts, setCartProducts] = useState([]);
@@ -60,7 +66,7 @@ export const AppContextProvider = ({ children }) => {
     state: "",
     postalCode: "",
     country: "",
-    phone: "",
+    phoneNumber: "",
   });
 
   const value = {
@@ -84,6 +90,10 @@ export const AppContextProvider = ({ children }) => {
     setCartProducts,
     address,
     setAddress,
+    orders, 
+    setOrders,
+    adminProducts,
+    setAdminProducts,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

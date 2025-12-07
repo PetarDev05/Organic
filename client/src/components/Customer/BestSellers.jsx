@@ -14,7 +14,7 @@ const BestSellers = () => {
 
   useEffect(() => {
     setBestProducts(() => {
-      return products.filter((product) => product.bestSelling === true);
+      return products.filter((product) => product.best === true);
     });
   }, [products]);
 

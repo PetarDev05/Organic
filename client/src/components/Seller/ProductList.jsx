@@ -1,30 +1,37 @@
+// react
+import { useEffect } from "react";
+
+// hooks
+import useAuthFetch from "../../hooks/useAuthFetch.jsx";
+import { useAppContext } from "../../context/AppContext.jsx";
+
 const ProductList = () => {
-  const products = [
-    {
-      name: "Nike Pegasus 41 shoes",
-      category: "Shoes",
-      offerPrice: 999,
-      inStock: true,
-      image:
-        "https://raw.githubusercontent.com/prebuiltui/prebuiltui/main/assets/card/productImage.png",
-    },
-    {
-      name: "Nike Pegasus 41 shoes",
-      category: "Shoes",
-      offerPrice: 999,
-      inStock: false,
-      image:
-        "https://raw.githubusercontent.com/prebuiltui/prebuiltui/main/assets/card/productImage2.png",
-    },
-    {
-      name: "Nike Pegasus 41 shoes",
-      category: "Shoes",
-      offerPrice: 999,
-      inStock: true,
-      image:
-        "https://raw.githubusercontent.com/prebuiltui/prebuiltui/main/assets/card/productImage3.png",
-    },
-  ];
+  const {adminProducts, setAdminProducts} = useAppContext();
+  const authFetch = useAuthFetch()
+
+  useEffect(() => {
+    const getAllAdminProducts = async () => {
+      const url = "http://localhost:8000/api/products/admin/all";
+      const data = await authFetch(url);
+      setAdminProducts(data.products);
+    }
+
+    getAllAdminProducts();
+  }, [])
+
+
+  const manipulateStock = async (productId) => {
+    const url = `http://localhost:8000/api/products/stock/${productId}`;
+    const options = {
+      method: "PATCH",
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    };
+    const data = await authFetch(url, options);
+    console.log(data);
+    
+  }
 
   return (
     <div className="flex-1 py-10 flex flex-col justify-between">
@@ -43,7 +50,7 @@ const ProductList = () => {
               </tr>
             </thead>
             <tbody className="text-sm text-gray-500">
-              {products.map((product, index) => (
+              {adminProducts?.map((product, index) => (
                 <tr key={index} className="border-t border-gray-500/20">
                   <td className="md:px-4 pl-2 md:pl-4 py-3 flex items-center space-x-3 truncate">
                     <div className="border border-gray-300 rounded overflow-hidden">
@@ -55,13 +62,16 @@ const ProductList = () => {
                   </td>
                   <td className="px-4 py-3">{product.category}</td>
                   <td className="px-4 py-3 max-sm:hidden">
-                    ${product.offerPrice}
+                    ${(product.price / 100).toFixed(2)}
                   </td>
                   <td className="px-4 py-3">
                     <label className="relative inline-flex items-center cursor-pointer text-gray-900 gap-3">
                       <input
                         type="checkbox"
                         className="sr-only peer"
+                        onClick={async () => {
+                          await manipulateStock(product._id)
+                        }}
                         defaultChecked={product.inStock}
                       />
                       <div className="w-12 h-7 bg-slate-300 rounded-full peer peer-checked:bg-blue-600 transition-colors duration-200"></div>

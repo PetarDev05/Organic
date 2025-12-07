@@ -89,7 +89,7 @@ const ShippingAddress = () => {
       </div>
       <input
         type="number"
-        name="phone"
+        name="phoneNumber"
         onChange={handleChange}
         value={address.phone}
         className="w-full p-2 border border-(--details-border) rounded-sm focus:border-(--primary) outline-none"

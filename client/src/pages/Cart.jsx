@@ -19,18 +19,10 @@ const notify = (message) => toast(message);
 
 const Cart = () => {
   const [showAddress, setShowAddress] = useState(false);
-  const [online, setOnline] = useState("Place Order");
   const authFetch = useAuthFetch();
-  const { user, cartProducts, setCartProducts, address } = useAppContext();
-
-  const navigate = useNavigate();
-
-  const handlePaymentType = (e) => {
-    const { value } = e.target;
-    value === "COD"
-      ? setOnline("Place Order")
-      : setOnline("Proceed to checkout");
-  };
+  const { user, cartProducts, setCartProducts, address, orders, setOrders } = useAppContext();
+  const [price, setPrice] = useState(0);
+  const [qty, setQty] = useState(1)
 
   const getCart = async () => {
     const url = `http://localhost:8000/api/products/${user.person._id}`;
@@ -43,6 +35,53 @@ const Cart = () => {
     const json = await authFetch(url, options);
     setCartProducts(json.data.cart);
   };
+
+  useEffect(() => {
+      const getTotalPrice = () => {
+        let amount = 0;
+        cartProducts.forEach((cartItem) => {      
+          amount += cartItem.productId.price * cartItem.quantity;
+        });
+
+        setPrice(amount);
+      }
+
+      getTotalPrice()
+    }, [cartProducts])
+
+  const handlePayment = async () => {
+
+    if (!address.firstName) {
+      notify("No address provided")
+      return
+    }
+    let amount = 0;
+    let items = [];
+    cartProducts.forEach((cartItem) => {
+      let newItem = {
+        name: cartItem.productId.name,
+        quantity: cartItem.quantity,
+      }
+      amount += cartItem.productId.price * cartItem.quantity;
+      items.push(newItem);
+    })
+
+    
+
+    const url = `http://localhost:8000/api/orders/${user.person._id}`;
+    let options = {
+      method: "POST",
+      body: JSON.stringify({address, items, amount}),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    }   
+
+    const data = await authFetch(url, options);
+    setOrders([...orders, data.createdOrder])
+    setCartProducts([]);
+    notify(data.message)
+  }
 
   const removeFromCart = async (productId) => {
     console.log("Product id: ",productId);
@@ -58,7 +97,6 @@ const Cart = () => {
     };
     const data = await authFetch(url, options);
     notify(data.message);
-    console.log(data);
     const newCart = cartProducts.filter((item) => item._id !== productId);
     setCartProducts(newCart);
   };
@@ -71,9 +109,7 @@ const Cart = () => {
     getCart();
   }, [user]);
 
-  const handlePayment = async () => {
-    
-  };
+
 
   return (
     <div className="flex flex-col md:flex-row py-16 max-w-6xl w-full px-6 mx-auto">
@@ -113,7 +149,7 @@ const Cart = () => {
                 </div>
               </div>
             </div>
-            <p className="text-center">${product.productId.price}</p>
+            <p className="text-center">${(product.productId.price / 100).toFixed(2)}</p>
             <button
               onClick={() => removeFromCart(product._id)}
               className="cursor-pointer mx-auto"
@@ -181,15 +217,9 @@ const Cart = () => {
               )}
             </div>
 
-            <p className="text-sm font-medium uppercase mt-6">Payment Method</p>
+            
 
-            <select
-              onChange={handlePaymentType}
-              className="w-full border border-gray-300 bg-white px-3 py-2 mt-2 outline-none"
-            >
-              <option value="COD">Cash On Delivery</option>
-              <option value="Online">Online Payment</option>
-            </select>
+            
           </div>
 
           <hr className="border-gray-300" />
@@ -197,7 +227,7 @@ const Cart = () => {
           <div className="text-gray-500 mt-4 space-y-2">
             <p className="flex justify-between">
               <span>Price</span>
-              <span>$20</span>
+              <span>${(price / 100).toFixed(2)}</span>
             </p>
             <p className="flex justify-between">
               <span>Shipping Fee</span>
@@ -205,11 +235,11 @@ const Cart = () => {
             </p>
             <p className="flex justify-between">
               <span>Tax (2%)</span>
-              <span>$20</span>
+              <span>${(price / 5000).toFixed(2)}</span>
             </p>
             <p className="flex justify-between text-lg font-medium mt-3">
               <span>Total Amount:</span>
-              <span>$20</span>
+              <span>${(price / 100 + price / 5000).toFixed(2)}</span>
             </p>
           </div>
 
@@ -217,7 +247,7 @@ const Cart = () => {
             onClick={handlePayment}
             className="w-full py-3 mt-6 cursor-pointer bg-(--primary) text-white font-medium hover:bg-(--primary-darker) transition"
           >
-            {online}
+            Place order
           </button>
         </div>
       </div>

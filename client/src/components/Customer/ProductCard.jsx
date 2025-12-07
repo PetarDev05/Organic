@@ -51,7 +51,7 @@ const ProductCard = ({ product }) => {
       <div className="text-gray-500/60 text-sm">
         <p>{product.category}</p>
         <p className="text-gray-700 font-medium text-lg truncate w-full">
-          {product.name} 1kg
+          {product.name}
         </p>
         <div className="flex items-center gap-0.5">
           {Array(5)
@@ -92,7 +92,7 @@ const ProductCard = ({ product }) => {
         </div>
         <div className="flex items-end justify-between mt-3">
           <p className="md:text-xl text-base font-medium text-(--primary)">
-            ${product.price}
+            ${(product.price / 100).toFixed(2)}
           </p>
           <div className="text-(--primary) flex flex-row items-center gap-2">
             <div className="flex items-center justify-center w-16 h-[34px] rounded select-none">

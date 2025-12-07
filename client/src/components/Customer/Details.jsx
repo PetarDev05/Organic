@@ -44,7 +44,7 @@ const Details = ({ product }) => {
     <div className="w-full min-h-[70vh] flex items-center justify-center py-10">
       <div className="w-[300px] min-[500px]:w-[450px] lg:w-[900px] flex flex-col lg:flex-row  items-start gap-7 ">
         <div className="aspect-square w-full border border-(--details-border) flex items-center justify-center">
-          <img src={product.image} alt="" className="" />
+          <img src={`/${product.image}`} alt={product.name} className="w-full h-full object-cover" />
         </div>
         <div className="w-full flex flex-col items-start justify-center gap-5 px-3">
           <div className="">
@@ -91,7 +91,7 @@ const Details = ({ product }) => {
           </div>
           <div className="">
             <p className="md:text-xl text-base font-medium text-(--primary)">
-              ${product.price}
+              ${(product.price / 100).toFixed(2)}
             </p>
             <p className="text-(--text-light)">(Without taxes)</p>
           </div>

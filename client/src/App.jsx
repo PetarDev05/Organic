@@ -15,7 +15,6 @@ import Cart from "./pages/Cart.jsx";
 import Shop from "./pages/Shop.jsx";
 import ProductDetails from "./pages/ProductDetails.jsx";
 import AddressForm from "./pages/ShippingAddress.jsx";
-import Checkout from "./pages/Checkout.jsx";
 import Orders from "./pages/Orders.jsx";
 import ProductList from "./components/Seller/ProductList.jsx";
 import OrderList from "./components/Seller/OrderList.jsx";
@@ -98,7 +97,6 @@ const App = () => {
           <Route path="products" element={<Shop />} />
           <Route path="details/:id" element={<ProductDetails />} />
           <Route path="address" element={<AddressForm />} />
-          <Route path="checkout" element={<Checkout />} />
           <Route path="orders" element={<Orders />} />
         </Route>
         <Route path="/seller" element={<SellerLayout />}>

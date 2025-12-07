@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const ordersSchema = new mongoose.Schema(
   {
-    adress: {
+    address: {
       firstName: {
         type: String,
         required: true,
@@ -32,7 +32,7 @@ const ordersSchema = new mongoose.Schema(
         required: true,
       },
       phoneNumber: {
-        type: String,
+        type: Number,
         required: true,
       },
     },
@@ -52,16 +52,14 @@ const ordersSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    method: {
-      type: String,
-      required: true,
-    },
-    date: {
-      type: String,
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
       required: true,
     },
   },
   { timestamps: true }
 );
 
-export const Order = mongoose.model("Order", ordersSchema);
+const Order = mongoose.model("Order", ordersSchema);
+
+export default Order;

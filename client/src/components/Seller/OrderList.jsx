@@ -1,115 +1,67 @@
+// react
+import { useEffect } from "react";
+
+// icons
+import { BiPackage } from "react-icons/bi";
+
+// hooks
+import { useAppContext } from "../../context/AppContext.jsx";
+import useAuthFetch from "../../hooks/useAuthFetch.jsx";
+
 
 const OrderList = () => {
-  const boxIcon =
-    "https://raw.githubusercontent.com/prebuiltui/prebuiltui/main/assets/e-commerce/boxIcon.svg";
+const {orders, setOrders, user} = useAppContext();
+  const authFetch = useAuthFetch()
 
-  const orders = [
-    {
-      id: 1,
-      items: [{ product: { name: "Nike Air Max 270" }, quantity: 1 }],
-      address: {
-        firstName: "John",
-        lastName: "Doe",
-        street: "123 Main St",
-        city: "New York",
-        state: "NY",
-        zipcode: "10001",
-        country: "USA",
-      },
-      amount: 320.0,
-      paymentType: "Credit Card",
-      orderDate: "10/10/2022",
-      isPaid: true,
-    },
-    {
-      id: 1,
-      items: [{ product: { name: "Nike Air Max 270" }, quantity: 1 }],
-      address: {
-        firstName: "John",
-        lastName: "Doe",
-        street: "123 Main St",
-        city: "New York",
-        state: "NY",
-        zipcode: "10001",
-        country: "USA",
-      },
-      amount: 320.0,
-      paymentType: "Credit Card",
-      orderDate: "10/10/2022",
-      isPaid: true,
-    },
-    {
-      id: 1,
-      items: [{ product: { name: "Nike Air Max 270" }, quantity: 1 }],
-      address: {
-        firstName: "John",
-        lastName: "Doe",
-        street: "123 Main St",
-        city: "New York",
-        state: "NY",
-        zipcode: "10001",
-        country: "USA",
-      },
-      amount: 320.0,
-      paymentType: "Credit Card",
-      orderDate: "10/10/2022",
-      isPaid: true,
-    },
-  ];
+  useEffect(() => {
+    const getAllOrders = async () => {
+      const url = "http://localhost:8000/api/orders/admin";
+      const data = await authFetch(url);
+      setOrders(data.orders);
+    }
+
+    getAllOrders()
+  }, [])
+
   return (
     <div className="pr-4 space-y-4 pb-4">
       <h2 className="text-lg font-medium">Orders List</h2>
-      {orders.map((order, index) => (
-        <div
-          key={index}
-          className="flex flex-col md:grid md:grid-cols-[2fr_1fr_1fr_1fr] md:items-center gap-5 p-5 max-w-4xl rounded-md border border-gray-300 text-gray-800"
-        >
-          <div className="flex gap-5">
-            <img
-              className="w-12 h-12 object-cover opacity-60"
-              src={boxIcon}
-              alt="boxIcon"
-            />
-            <>
-              {order.items.map((item, index) => (
-                <div key={index} className="flex flex-col justify-center">
-                  <p className="font-medium">
-                    {item.product.name}{" "}
-                    <span
-                      className={`text-indigo-500 ${
-                        item.quantity < 2 && "hidden"
-                      }`}
-                    >
-                      x {item.quantity}
-                    </span>
+      {orders.map((order) => (
+              <div
+                key={order._id}
+                className="md:w-fit flex flex-col md:grid md:grid-cols-[1fr_1fr_1fr] md:items-center gap-5 p-5 max-w-4xl rounded-md border border-gray-300 text-gray-800"
+              >
+                <div className="md:w-fit flex gap-5 flex-row items-center justify-between">
+                  <BiPackage className="text-5xl" />
+                  <div  className="flex flex-col justify-center">
+                    {order.items.map((item, index) => (
+                        <p key={index} className="font-medium flex flex-row items-center justify-between gap-5">
+                          {item.name}
+                          <span
+                            className="text-indigo-500"
+                          >
+                            x {item.quantity}
+                          </span>
+                        </p>
+                    ))}
+                  </div>
+                </div>
+                <div className="text-sm">
+                  <p className="font-medium mb-1">
+                    {order.address.firstName} {order.address.lastName}
+                  </p>
+                  <p>
+                    {order.address.street}, {order.address.city},{" "}
+                    {order.address.state},{order.address.postalCode},{" "}
+                    {order.address.country}
                   </p>
                 </div>
-              ))}
-            </>
-          </div>
-
-          <div className="text-sm">
-            <p className="font-medium mb-1">
-              {order.address.firstName} {order.address.lastName}
-            </p>
-            <p>
-              {order.address.street}, {order.address.city},{" "}
-              {order.address.state},{order.address.zipcode},{" "}
-              {order.address.country}
-            </p>
-          </div>
-
-          <p className="font-medium text-base my-auto text-black/70">
-            ${order.amount}
-          </p>
-
-          <div className="flex flex-col text-sm">
-            <p>Method: {order.paymentType}</p>
-            <p>Date: {order.orderDate}</p>
-            <p>Payment: {order.isPaid ? "Paid" : "Pending"}</p>
-          </div>
-        </div>
-      ))}
+      
+                <p className="font-medium text-base my-auto text-black/70 md:text-center">
+                  Total: ${(order.amount / 100).toFixed(2)}
+                </p>
+              </div>
+            ))}
     </div>
   );
 }
