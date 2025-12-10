@@ -45,21 +45,52 @@ import NavBar from "./components/Customer/NavBar.jsx";
 const notify = (message) => toast(message);
 
 const App = () => {
-  const { dispatchProducts, showLogin, dispatchUser, user, setLoadingUser } = useAppContext();
+  const { 
+    dispatchProducts, 
+    dispatchUser, 
+    user, 
+    setLoadingUser, 
+    loadingUser, 
+    setCartLength, 
+    cartProducts, 
+  } = useAppContext();
   const authFetch = useAuthFetch();
+
+  useEffect(() => {
+    const getLength = async () => {
+      const url = `http://localhost:8000/api/products/length/${user.person._id}`;
+      const options = {
+        method: "GET",
+      }
+
+      const data = await authFetch(url, options);
+      setCartLength(data.cartLength)
+    }
+
+    if (!loadingUser && user) {
+      getLength();
+    }
+  }, [loadingUser, user, cartProducts])
 
   useEffect(() => {
     const fetchAllProducts = async () => {
       const url = "http://localhost:8000/api/products/all";
-      const data = await authFetch(url);
+      const options = {
+        method: "GET",
+      }
+      const data = await authFetch(url, options);
       dispatchProducts({
         type: "GET_ALL_PRODUCTS",
         payload: data.dispatchValue,
       });
     };
 
-    fetchAllProducts();
-  }, []);
+    if (!loadingUser && user) {
+      fetchAllProducts();
+    }
+  }, [user, loadingUser]);
+
+  
 
   useEffect(() => {
     const extendSession = async () => {
@@ -85,7 +116,7 @@ const App = () => {
       }
     };
 
-    extendSession();
+    extendSession()
   }, []);
 
   const router = createBrowserRouter(
@@ -93,16 +124,16 @@ const App = () => {
       <>
         <Route path="/" element={<RootLayout />}>
           <Route index element={<Home />} />
-          <Route path="cart" element={<Cart />} />
-          <Route path="products" element={<Shop />} />
-          <Route path="details/:id" element={<ProductDetails />} />
-          <Route path="address" element={<AddressForm />} />
-          <Route path="orders" element={<Orders />} />
+          <Route path="cart" element={!user ? <Navigate to="/" /> : <Cart />} />
+          <Route path="products" element={!user ? <Navigate to="/" /> : <Shop />} />
+          <Route path="details/:id" element={!user ? <Navigate to="/" /> : <ProductDetails />} />
+          <Route path="address" element={!user ? <Navigate to="/" /> : <AddressForm />} />
+          <Route path="orders" element={!user ? <Navigate to="/" /> : <Orders />} />
         </Route>
         <Route path="/seller" element={<SellerLayout />}>
-          <Route index element={<ProductList />} />
-          <Route path="new" element={<NewProductForm />} />
-          <Route path="orders" element={<OrderList />} />
+          <Route index element={!user ? <Navigate to="/" /> : <ProductList />} />
+          <Route path="new" element={!user ? <Navigate to="/" /> : <NewProductForm />} />
+          <Route path="orders" element={!user ? <Navigate to="/" /> : <OrderList />} />
         </Route>
       </>
     )

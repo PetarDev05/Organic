@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 
 // react-router-dom
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 
 // icons
 import { GoArrowLeft } from "react-icons/go";
@@ -20,21 +19,27 @@ const notify = (message) => toast(message);
 const Cart = () => {
   const [showAddress, setShowAddress] = useState(false);
   const authFetch = useAuthFetch();
-  const { user, cartProducts, setCartProducts, address, orders, setOrders } = useAppContext();
+  const { user, cartProducts, setCartProducts, address, orders, setOrders, loadingUser } = useAppContext();
   const [price, setPrice] = useState(0);
-  const [qty, setQty] = useState(1)
 
-  const getCart = async () => {
+  useEffect(() => {
+    const getCart = async () => {
     const url = `http://localhost:8000/api/products/${user.person._id}`;
     const options = {
       method: "GET",
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-      },
     };
     const json = await authFetch(url, options);
     setCartProducts(json.data.cart);
   };
+    if (!user || !user.person._id) {
+      return;
+    }
+
+    if (!loadingUser && user) {
+      getCart();
+    }
+    
+  }, [user, loadingUser])
 
   useEffect(() => {
       const getTotalPrice = () => {
@@ -72,9 +77,6 @@ const Cart = () => {
     let options = {
       method: "POST",
       body: JSON.stringify({address, items, amount}),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-      },
     }   
 
     const data = await authFetch(url, options);
@@ -84,16 +86,10 @@ const Cart = () => {
   }
 
   const removeFromCart = async (productId) => {
-    console.log("Product id: ",productId);
-    console.log("User id: ", user.person._id);
-
     const url = `http://localhost:8000/api/products/cart/${user.person._id}`;
     const options = {
       method: "PATCH",
       body: JSON.stringify({ productId }),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-      },
     };
     const data = await authFetch(url, options);
     notify(data.message);
@@ -101,13 +97,7 @@ const Cart = () => {
     setCartProducts(newCart);
   };
 
-  useEffect(() => {
-    if (!user || !user.person._id) {
-      return;
-    }
 
-    getCart();
-  }, [user]);
 
 
 
@@ -117,7 +107,7 @@ const Cart = () => {
         <h1 className="text-3xl font-medium mb-6">
           Shopping Cart
           <span className="text-sm text-(--primary) ml-6">
-            {cartProducts.length} Items
+            {cartProducts?.length} Items
           </span>
         </h1>
 
@@ -127,7 +117,7 @@ const Cart = () => {
           <p className="text-center">Action</p>
         </div>
 
-        {cartProducts.map((product, index) => (
+        {cartProducts?.map((product, index) => (
           <div
             key={index}
             className="grid grid-cols-[2fr_1fr_1fr] text-gray-500 items-center text-sm md:text-base font-medium pt-3"

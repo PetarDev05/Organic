@@ -10,18 +10,24 @@ import useAuthFetch from "../../hooks/useAuthFetch.jsx";
 
 
 const OrderList = () => {
-const {orders, setOrders, user} = useAppContext();
+const {orders, setOrders, loadingUser, user } = useAppContext();
   const authFetch = useAuthFetch()
 
   useEffect(() => {
     const getAllOrders = async () => {
       const url = "http://localhost:8000/api/orders/admin";
-      const data = await authFetch(url);
+      const options = {
+        method: "GET"
+      }
+      const data = await authFetch(url, options);
       setOrders(data.orders);
     }
 
-    getAllOrders()
-  }, [])
+    if (!loadingUser && user) {
+      getAllOrders()
+    }
+
+  }, [loadingUser, user])
 
   return (
     <div className="pr-4 space-y-4 pb-4">

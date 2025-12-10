@@ -8,7 +8,7 @@ const NewProductForm = () => {
         <div>
           <p className="text-base font-medium">Product Image</p>
           <div className="flex flex-wrap items-center gap-3 mt-2">
-            <label  htmlFor="input">
+            <label htmlFor="input">
               <input accept="image/*" type="file" id="input" hidden />
               <img
                 className="max-w-24 cursor-pointer"
@@ -20,7 +20,7 @@ const NewProductForm = () => {
             </label>
           </div>
         </div>
-        <div className="flex flex-col gap-1 max-w-md">
+        <div className="min-w-full flex flex-col gap-1">
           <label className="text-base font-medium" htmlFor="product-name">
             Product Name
           </label>
@@ -32,7 +32,7 @@ const NewProductForm = () => {
             required
           />
         </div>
-        <div className="flex flex-col gap-1 max-w-md">
+        <div className="w-full flex flex-col gap-1">
           <label
             className="text-base font-medium"
             htmlFor="product-description"
@@ -47,6 +47,19 @@ const NewProductForm = () => {
           ></textarea>
         </div>
         <div className="w-full flex flex-col gap-1">
+            <label className="text-base font-medium" htmlFor="product-price">
+              Rating
+            </label>
+            <input
+              id="product-rating"
+              type="number"
+              placeholder="0"
+              className="outline-none md:py-2.5 py-2 px-3 rounded border border-gray-500/40"
+              required
+            />
+          </div>
+
+        <div className="w-full flex flex-col gap-1">
           <label className="text-base font-medium" htmlFor="category">
             Category
           </label>
@@ -55,21 +68,14 @@ const NewProductForm = () => {
             className="outline-none md:py-2.5 py-2 px-3 rounded border border-gray-500/40"
           >
             <option value="">Select Category</option>
-            {[
-              { name: "Electronics" },
-              { name: "Clothing" },
-              { name: "Accessories" },
-            ].map((item, index) => (
-              <option key={index} value={item.name}>
-                {item.name}
-              </option>
-            ))}
+            <option value="fruits">fruits</option>
+            <option value="vegetables">vegetables</option>
           </select>
         </div>
-        <div className="flex items-center gap-5 flex-wrap">
+        <div className="flex flex-row items-end gap-5 flex-wrap">
           <div className="flex-1 flex flex-col gap-1 w-32">
             <label className="text-base font-medium" htmlFor="product-price">
-              Product Price
+              Product Price ($ USD)
             </label>
             <input
               id="product-price"
@@ -79,21 +85,35 @@ const NewProductForm = () => {
               required
             />
           </div>
+
           <div className="flex-1 flex flex-col gap-1 w-32">
-            <label className="text-base font-medium" htmlFor="offer-price">
-              Offer Price
+            <label className="text-base font-medium" htmlFor="product-price">
+              Best selling
             </label>
-            <input
-              id="offer-price"
-              type="number"
-              placeholder="0"
-              className="outline-none md:py-2.5 py-2 px-3 rounded border border-gray-500/40"
-              required
-            />
+            <select
+            id="best"
+            className="outline-none md:py-2.5 py-2 px-3 rounded border border-gray-500/40"
+          >
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
           </div>
+          <div className="flex-1 flex flex-col gap-1 w-32">
+            <label className="text-base font-medium" htmlFor="product-price">
+              In stock
+            </label>
+            <select
+            id="best"
+            className="outline-none md:py-2.5 py-2 px-3 rounded border border-gray-500/40"
+          >
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+          </div>
+          
         </div>
-        <button className="px-8 py-2.5 bg-(--primary) text-white font-medium rounded">
-          ADD
+        <button className="w-full px-8 py-2.5 bg-(--primary) text-white font-medium rounded">
+          ADD PRODUCT
         </button>
       </form>
     </div>

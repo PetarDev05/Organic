@@ -21,10 +21,6 @@ export const AppContextProvider = ({ children }) => {
     }
   };
 
-  const ordersReducer = () => {
-
-  }
-
   const userReducer = (userState, action) => {
     switch (action.type) {
       case "LOGIN":
@@ -51,12 +47,14 @@ export const AppContextProvider = ({ children }) => {
   const [productsState, dispatchProducts] = useReducer(productsReducer, {
     products: [],
   });
+  const [cartLength, setCartLength] = useState(0);
   const [adminProducts, setAdminProducts] = useState([]);
   const [loadingUser, setLoadingUser] = useState(true);
   const [userState, dispatchUser] = useReducer(userReducer, { user: null });
   const [orders, setOrders] = useState([]);
   const [allFavoriteProducts, setAllFavoriteProducts] =
     useState(FavoriteProducts);
+    const [selected, setSelected] = useState(true);
   const [cartProducts, setCartProducts] = useState([]);
   const [address, setAddress] = useState({
     firstName: "",
@@ -68,6 +66,8 @@ export const AppContextProvider = ({ children }) => {
     country: "",
     phoneNumber: "",
   });
+
+  const [productFlag, setProductFlag] = useState("fruits");
 
   const value = {
     user,
@@ -94,6 +94,12 @@ export const AppContextProvider = ({ children }) => {
     setOrders,
     adminProducts,
     setAdminProducts,
+    cartLength,
+    setCartLength,
+    productFlag,
+    setProductFlag,
+    selected, 
+    setSelected,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

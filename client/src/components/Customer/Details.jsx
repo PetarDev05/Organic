@@ -23,9 +23,6 @@ const Details = ({ product }) => {
     const options = {
       method: "PATCH",
       body: JSON.stringify({ productId: product._id, quantity: 1 }),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-      },
     };
 
     const data = await authFetch(url, options);

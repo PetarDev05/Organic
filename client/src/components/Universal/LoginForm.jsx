@@ -28,6 +28,12 @@ const LoginForm = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+
+    if (!email || !password) {
+      notify("All fields must be filed");
+      return
+    }
+
     const url = `http://localhost:8000/api/users/${
       flag === "register" ? "signup" : "login"
     }`;
@@ -38,6 +44,10 @@ const LoginForm = () => {
     };
 
     if (flag === "register") {
+      if (!name) {
+        notify("All fields must be filed");
+        return 
+      }
       body.name = name;
     }
 
@@ -46,7 +56,7 @@ const LoginForm = () => {
     };
     const data = await userAction(url, options);
     dispatchUser({ type: "LOGIN", payload: data });
-    setLoadingUser(false)
+    setLoadingUser(false);
     if (data.message) {
       notify(data.message);
       setName("");

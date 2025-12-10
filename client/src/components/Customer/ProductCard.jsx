@@ -14,7 +14,7 @@ import { toast } from "react-hot-toast";
 const notify = (message) => toast(message);
 
 const ProductCard = ({ product }) => {
-  const { user } = useAppContext();
+  const { user, setCartLength } = useAppContext();
   const [count, setCount] = useState(0);
   const authFetch = useAuthFetch();
 
@@ -23,9 +23,6 @@ const ProductCard = ({ product }) => {
     const options = {
       method: "PATCH",
       body: JSON.stringify({ productId: product._id, quantity: count }),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-      },
     };
     if (!count) {
       notify("Please, increase the quantity");
@@ -33,6 +30,9 @@ const ProductCard = ({ product }) => {
     }
     const data = await authFetch(url, options);
     notify(data.message);
+    if (data.message === "Product added to cart") {
+      setCartLength((prev) => prev + 1);
+    }
     setCount(0);
   };
 

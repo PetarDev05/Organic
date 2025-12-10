@@ -5,32 +5,39 @@ import { useEffect } from "react";
 import useAuthFetch from "../../hooks/useAuthFetch.jsx";
 import { useAppContext } from "../../context/AppContext.jsx";
 
+// notifications
+import { toast } from "react-hot-toast";
+
+const notify = (message) => toast(message);
+
 const ProductList = () => {
-  const {adminProducts, setAdminProducts} = useAppContext();
+  const {adminProducts, setAdminProducts, loadingUser, user} = useAppContext();
   const authFetch = useAuthFetch()
 
   useEffect(() => {
     const getAllAdminProducts = async () => {
       const url = "http://localhost:8000/api/products/admin/all";
-      const data = await authFetch(url);
+      const options = {
+        method: "GET"
+      }
+      const data = await authFetch(url, options);
       setAdminProducts(data.products);
     }
 
-    getAllAdminProducts();
-  }, [])
+    if (!loadingUser && user) {
+      getAllAdminProducts();
+    }
+
+  }, [loadingUser, user])
 
 
   const manipulateStock = async (productId) => {
     const url = `http://localhost:8000/api/products/stock/${productId}`;
     const options = {
       method: "PATCH",
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-      },
     };
     const data = await authFetch(url, options);
-    console.log(data);
-    
+    notify(data.message)
   }
 
   return (

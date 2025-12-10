@@ -17,7 +17,7 @@ import toast from "react-hot-toast";
 const notify = (message) => toast(message);
 
 const NavBar = () => {
-  const { user, dispatchUser, setShowLogin, cartProducts } =
+  const { user, dispatchUser, setShowLogin, cartProducts, cartLength } =
     useAppContext();
   const [open, setOpen] = useState(false);
 
@@ -25,7 +25,7 @@ const NavBar = () => {
     const url = "http://localhost:8000/api/users/logout";
     const options = {
       method: "POST",
-      credentials: "include",
+      credentials: "include"
     };
     const response = await fetch(url, options);
     const json = await response.json();
@@ -79,7 +79,7 @@ const NavBar = () => {
                   className="text-xl"
                 />
                 <button className="absolute -top-1 -right-2 text-xs text-white bg-(--primary) w-[18px] h-[18px] rounded-full">
-                  {cartProducts.length}
+                  {cartLength}
                 </button>
               </Link>
             )}

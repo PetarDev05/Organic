@@ -15,7 +15,10 @@ const Orders = () => {
   useEffect(() => {
     const getAllOrders = async () => {
       const url = `http://localhost:8000/api/orders/${user.person._id}`;
-      const data = await authFetch(url);
+      const options = {
+        method: "GET"
+      }
+      const data = await authFetch(url, options);
       setOrders(data.orders);
     }
 

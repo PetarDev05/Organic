@@ -16,6 +16,21 @@ export const getAllProducts = async (req, res) => {
   }
 };
 
+export const getCartLength = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const user = await User.findById(userId);
+    const cartLength = user.cart.length; 
+    res.status(200).json({
+      cartLength,
+    })
+  } catch (error) {
+    res.status(400).json({
+      message: error.message,
+    });
+  }
+};
+
 export const getAllAdminProducts = async (req, res) => {
   try {
     const products = await Product.find();
@@ -103,6 +118,7 @@ export const addProductToCart = async (req, res) => {
     await user.save();
     res.status(200).json({
       message: "Product added to cart",
+      newItem,
     });
   } catch (error) {
     res.status(400).json({

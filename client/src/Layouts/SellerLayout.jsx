@@ -1,13 +1,10 @@
 // components
 import NavBarSideBar from "../components/Seller/NavBarSideBar.jsx";
-import ProductList from "../components/Seller/ProductList.jsx";
-import NewProductForm from "../components/Seller/NewProductForm.jsx";
-import OrderList from "../components/Seller/OrderList.jsx";
 import LoginForm from "../components/Universal/LoginForm.jsx";
 import Loading from "../components/Universal/Loading.jsx";
 
 // react-router-dom
-import { Routes, Route, Outlet, Navigate } from "react-router-dom";
+import { Outlet, Navigate } from "react-router-dom";
 
 // context
 import { useAppContext } from "../context/AppContext.jsx";
