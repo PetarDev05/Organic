@@ -1,10 +1,6 @@
 import mongoose from "mongoose";
-
-// validators
 import { signupValidator } from "../validators/signupData.validators.js";
 import { loginValidator } from "../validators/loginData.validators.js";
-
-// utils
 import { generateHash } from "../utils/generateHash.utils.js";
 import { comparePasswords } from "../utils/comparePasswords.utils.js";
 

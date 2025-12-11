@@ -1,11 +1,4 @@
-// react
 import { createContext, useContext, useState } from "react";
-
-// react-router-dom
-
-// data
-import { products } from "../data/products.js";
-import { FavoriteProducts } from "../data/products.js";
 import { useReducer } from "react";
 export const AppContext = createContext();
 
@@ -43,7 +36,6 @@ export const AppContextProvider = ({ children }) => {
   const [user, setUser] = useState(true);
   const [isSeller, setIsSeller] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
-  const [allProducts, setAllProducts] = useState(products);
   const [productsState, dispatchProducts] = useReducer(productsReducer, {
     products: [],
   });
@@ -52,10 +44,10 @@ export const AppContextProvider = ({ children }) => {
   const [loadingUser, setLoadingUser] = useState(true);
   const [userState, dispatchUser] = useReducer(userReducer, { user: null });
   const [orders, setOrders] = useState([]);
-  const [allFavoriteProducts, setAllFavoriteProducts] =
-    useState(FavoriteProducts);
-    const [selected, setSelected] = useState(true);
+  
+  const [selected, setSelected] = useState(true);
   const [cartProducts, setCartProducts] = useState([]);
+  const [searchedProducts, setSearchedProducts] = useState([])
   const [address, setAddress] = useState({
     firstName: "",
     lastName: "",
@@ -68,6 +60,7 @@ export const AppContextProvider = ({ children }) => {
   });
 
   const [productFlag, setProductFlag] = useState("fruits");
+  
 
   const value = {
     user,
@@ -75,11 +68,9 @@ export const AppContextProvider = ({ children }) => {
     isSeller,
     setIsSeller,
     showLogin,
+    searchedProducts,
+    setSearchedProducts,
     setShowLogin,
-    allProducts,
-    setAllProducts,
-    allFavoriteProducts,
-    setAllFavoriteProducts,
     ...productsState,
     dispatchProducts,
     ...userState,

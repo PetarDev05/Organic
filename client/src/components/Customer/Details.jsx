@@ -1,15 +1,7 @@
-// react-router-dom
-import { Link, useParams } from "react-router-dom";
-
-// hooks
+import { Link } from "react-router-dom";
 import { useAppContext } from "../../context/AppContext";
 import useAuthFetch from "../../hooks/useAuthFetch";
-
-// icons
 import { FaRegDotCircle } from "react-icons/fa";
-import { useEffect, useState } from "react";
-
-// notifications
 import { toast } from "react-hot-toast";
 
 const notify = (message) => toast(message);

@@ -1,4 +1,3 @@
-// icons
 import { ImLeaf } from "react-icons/im";
 
 const Loading = () => {

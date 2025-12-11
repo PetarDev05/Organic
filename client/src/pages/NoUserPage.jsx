@@ -1,4 +1,3 @@
-// components
 import Features from "../components/Customer/Features";
 import MainBanner from "../components/Customer/MainBanner";
 import Newsletter from "../components/Customer/Newsletter";

@@ -1,14 +1,7 @@
-// react
 import { useState } from "react";
-
-// react-router-dom
 import { Link } from "react-router-dom";
-
-// hooks
 import { useAppContext } from "../../context/AppContext.jsx";
 import useAuthFetch from "../../hooks/useAuthFetch.jsx";
-
-// notifications
 import { toast } from "react-hot-toast";
 
 const notify = (message) => toast(message);

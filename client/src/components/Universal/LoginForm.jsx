@@ -1,23 +1,12 @@
-// react
 import { useState } from "react";
-
-// icons
 import { IoCloseCircleOutline } from "react-icons/io5";
-
-// hooks
 import { useAppContext } from "../../context/AppContext.jsx";
 import useUserAction from "../../hooks/useUserAction.jsx";
-
-// dependencies
 import toast from "react-hot-toast";
-
-// react-router-dom
-import { useNavigate } from "react-router-dom";
 
 const notify = (message) => toast(message);
 
 const LoginForm = () => {
-  const navigate = useNavigate();
   const { setShowLogin, dispatchUser, setLoadingUser } = useAppContext();
   const userAction = useUserAction();
 

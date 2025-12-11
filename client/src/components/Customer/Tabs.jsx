@@ -1,8 +1,4 @@
-// hooks
 import { useAppContext } from "../../context/AppContext.jsx";
-
-// react
-import { useState } from "react";
 
 const Tabs = () => {
   const { setProductFlag, selected, setSelected } = useAppContext();

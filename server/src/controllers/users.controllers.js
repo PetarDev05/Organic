@@ -1,13 +1,8 @@
-// models
 import User from "../models/users.models.js";
-
-// utils
 import {
   generateAccessToken,
   generateRefreshToken,
 } from "../utils/generateTokens.utils.js";
-
-// dependencies
 import jwt from "jsonwebtoken";
 
 export const signUpUser = async (req, res) => {

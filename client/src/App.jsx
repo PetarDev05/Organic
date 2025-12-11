@@ -1,15 +1,5 @@
-// react
 import { useEffect } from "react";
-
-// components
-import LoginForm from "./components/Universal/LoginForm.jsx";
-import Loading from "./components/Universal/Loading.jsx";
-
-// layouts
-import CustomerLayout from "./Layouts/CustomerLayout.jsx";
 import SellerLayout from "./Layouts/SellerLayout.jsx";
-
-// pages
 import Home from "./pages/Home.jsx";
 import Cart from "./pages/Cart.jsx";
 import Shop from "./pages/Shop.jsx";
@@ -19,28 +9,17 @@ import Orders from "./pages/Orders.jsx";
 import ProductList from "./components/Seller/ProductList.jsx";
 import OrderList from "./components/Seller/OrderList.jsx";
 import NewProductForm from "./components/Seller/NewProductForm.jsx";
-
-// hooks
 import { useAppContext } from "./context/AppContext.jsx";
 import useAuthFetch from "./hooks/useAuthFetch.jsx";
-
-// notifications
 import { toast, Toaster } from "react-hot-toast";
-
-// react-router-dom
 import {
-  Routes,
   Route,
   createBrowserRouter,
   createRoutesFromElements,
-  Outlet,
   RouterProvider,
   Navigate,
 } from "react-router-dom";
-import NoUserPage from "./pages/NoUserPage.jsx";
-import NoUserLayout from "./Layouts/NoUserLayout.jsx";
 import RootLayout from "./Layouts/RootLayout.jsx";
-import NavBar from "./components/Customer/NavBar.jsx";
 
 const notify = (message) => toast(message);
 

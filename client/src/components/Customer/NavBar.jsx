@@ -1,17 +1,10 @@
-// icons
 import { FaBasketShopping } from "react-icons/fa6";
 import { HiMiniMagnifyingGlass } from "react-icons/hi2";
 import { ImLeaf } from "react-icons/im";
 import { RiMenu3Fill } from "react-icons/ri";
-
-// react
 import { useState } from "react";
 import { NavLink, Link } from "react-router-dom";
-
-// hooks
 import { useAppContext } from "../../context/AppContext.jsx";
-
-// dependencies
 import toast from "react-hot-toast";
 
 const notify = (message) => toast(message);
@@ -20,6 +13,7 @@ const NavBar = () => {
   const { user, dispatchUser, setShowLogin, cartProducts, cartLength } =
     useAppContext();
   const [open, setOpen] = useState(false);
+
 
   const handleLogout = async () => {
     const url = "http://localhost:8000/api/users/logout";
@@ -32,6 +26,7 @@ const NavBar = () => {
     dispatchUser({ type: "LOGOUT" });
     notify(json.message);
   };
+
 
   return (
     <nav className="flex items-center justify-between px-10 py-4 border-b border-gray-300 bg-white relative transition-all">
@@ -63,14 +58,7 @@ const NavBar = () => {
               </NavLink>
             )}
 
-            <div className="hidden md:flex items-center text-sm gap-2 border border-gray-300 px-3 rounded-full">
-              <input
-                className="py-1.5 w-full bg-transparent outline-none placeholder-gray-500"
-                type="text"
-                placeholder="Search products"
-              />
-              <HiMiniMagnifyingGlass className="text-lg" />
-            </div>
+            
 
             {user && (
               <Link to="/cart" className="relative cursor-pointer max-lg:hidden">
@@ -188,14 +176,6 @@ const NavBar = () => {
               Login
             </button>
           )}
-          <div className="flex items-center text-sm gap-2 border border-gray-300 px-3 rounded-full">
-            <input
-              className="py-1.5 w-full bg-transparent outline-none placeholder-gray-500"
-              type="text"
-              placeholder="Search products"
-            />
-            <HiMiniMagnifyingGlass className="text-lg" />
-          </div>
         </div>
       </div>
     </nav>

@@ -1,11 +1,8 @@
-// components
 import MainBanner from "../components/Customer/MainBanner.jsx";
 import SmallBanner from "../components/Customer/SmallBanner.jsx";
 import Newsletter from "../components/Customer/Newsletter.jsx";
 import BestSellers from "../components/Customer/BestSellers.jsx";
 import Features from "../components/Customer/Features.jsx";
-
-// context
 import { useAppContext } from "../context/AppContext.jsx";
 
 const Home = () => {

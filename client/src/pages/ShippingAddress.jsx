@@ -1,4 +1,3 @@
-// components
 import ShippingAddress from "../components/Customer/AddressForm.jsx";
 
 const AddressForm = () => {

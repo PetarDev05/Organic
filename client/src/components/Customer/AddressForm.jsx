@@ -1,7 +1,4 @@
-// react-router-dom
-import { Link, useNavigate } from "react-router-dom";
-
-// hooks
+import { useNavigate } from "react-router-dom";
 import { useAppContext } from "../../context/AppContext.jsx";
 
 const ShippingAddress = () => {

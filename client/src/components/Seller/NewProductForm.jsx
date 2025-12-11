@@ -1,6 +1,3 @@
-
-
-
 const NewProductForm = () => {
   return (
     <div className="flex flex-col justify-between bg-white">

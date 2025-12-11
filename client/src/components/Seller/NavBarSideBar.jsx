@@ -1,25 +1,15 @@
-// react-router-dom
 import { Link, NavLink } from "react-router-dom";
-
-// icons
 import { ImLeaf } from "react-icons/im";
-
-// notifications
 import { toast, Toaster } from "react-hot-toast";
-
-// context
 import { useAppContext } from "../../context/AppContext.jsx";
-
-// components
 import { HiOutlineRocketLaunch } from "react-icons/hi2";
 import { LuCircleFadingPlus } from "react-icons/lu";
 import { PiPackageBold } from "react-icons/pi";
-import { useState } from "react";
 
 const notify = (message) => toast(message);
 
 const NavBarSideBar = () => {
-  const { user, dispatchUser, setShowLogin, navigate, cartProducts } =
+  const { dispatchUser } =
     useAppContext();
 
   const dashboardIcon = <HiOutlineRocketLaunch className="text-2xl" />;

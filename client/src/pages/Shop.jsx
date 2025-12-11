@@ -1,14 +1,11 @@
-// components
 import Tabs from "../components/Customer/Tabs.jsx";
 import ProductCard from "../components/Customer/ProductCard.jsx";
-
-// context
 import { useAppContext } from "../context/AppContext.jsx";
 
 const Shop = () => {
   const { products, productFlag } = useAppContext();
 
-  const productsForRender = products.filter(item => item.category === productFlag);
+const productsForRender = products.filter(item => item.category === productFlag);
 
   return (
     <div className="w-full min-h-[65vh] flex flex-col items-center justify-start gap-10 px-10 py-20">

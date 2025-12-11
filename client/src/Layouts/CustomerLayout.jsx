@@ -1,15 +1,11 @@
-// components
 import NavBar from "../components/Customer/NavBar.jsx";
 import Footer from "../components/Customer/Footer.jsx";
-
-//pages
 import Home from "../pages/Home.jsx";
 import Cart from "../pages/Cart.jsx";
 import Shop from "../pages/Shop.jsx";
 import ProductDetails from "../pages/ProductDetails.jsx";
 import AddressForm from "../pages/ShippingAddress.jsx";
 import Orders from "../pages/Orders.jsx";
-// react-router-dom
 import { Routes, Route } from "react-router-dom";
 
 const CustomerLayout = () => {

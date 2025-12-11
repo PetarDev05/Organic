@@ -1,4 +1,3 @@
-// icons
 import { BsCoin } from "react-icons/bs";
 import { TbTruckDelivery } from "react-icons/tb";
 import { SiCodefresh } from "react-icons/si";

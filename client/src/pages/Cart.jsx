@@ -1,16 +1,7 @@
-// react
 import { useEffect, useState } from "react";
-
-// react-router-dom
 import { Link } from "react-router-dom";
-
-// icons
 import { GoArrowLeft } from "react-icons/go";
-
-// notifications
 import { toast } from "react-hot-toast";
-
-// hooks
 import { useAppContext } from "../context/AppContext.jsx";
 import useAuthFetch from "../hooks/useAuthFetch.jsx";
 

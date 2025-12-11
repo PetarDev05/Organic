@@ -1,10 +1,5 @@
-// react
 import { useEffect } from "react";
-
-// icons
 import { BiPackage } from "react-icons/bi";
-
-// hooks
 import { useAppContext } from "../../context/AppContext.jsx";
 import useAuthFetch from "../../hooks/useAuthFetch.jsx";
 

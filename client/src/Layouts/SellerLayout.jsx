@@ -1,12 +1,7 @@
-// components
 import NavBarSideBar from "../components/Seller/NavBarSideBar.jsx";
 import LoginForm from "../components/Universal/LoginForm.jsx";
 import Loading from "../components/Universal/Loading.jsx";
-
-// react-router-dom
 import { Outlet, Navigate } from "react-router-dom";
-
-// context
 import { useAppContext } from "../context/AppContext.jsx";
 
 const SellerLayout = () => {

@@ -1,11 +1,6 @@
-// react
 import { useEffect } from "react";
-
-// hooks
 import useAuthFetch from "../../hooks/useAuthFetch.jsx";
 import { useAppContext } from "../../context/AppContext.jsx";
-
-// notifications
 import { toast } from "react-hot-toast";
 
 const notify = (message) => toast(message);

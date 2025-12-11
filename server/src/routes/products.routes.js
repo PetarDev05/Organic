@@ -1,6 +1,4 @@
 import express from "express";
-
-// controllers
 import {
   getAllProducts,
   createNewProduct,

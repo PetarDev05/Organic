@@ -1,4 +1,3 @@
-// icons
 import { FaCcVisa } from "react-icons/fa";
 import { FaCcMastercard } from "react-icons/fa";
 

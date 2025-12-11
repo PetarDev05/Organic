@@ -1,7 +1,4 @@
-// models
 import User from "../models/users.models.js";
-
-// utils
 import { generateHash } from "./generateHash.utils.js";
 
 export const createAdmin = async () => {

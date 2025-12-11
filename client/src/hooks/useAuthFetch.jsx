@@ -1,7 +1,4 @@
-// hooks
 import { useAppContext } from "../context/AppContext.jsx";
-
-// notifications
 import { toast } from "react-hot-toast";
 
 const notify = (message) => toast(message);
@@ -16,7 +13,6 @@ const { dispatchUser, user } = useAppContext()
       Authorization: `Bearer ${user.accessToken}`,
     };
 
-    // Initial request
     const response = await fetch(url, options);
     const json = await response.json();
 
@@ -27,7 +23,6 @@ const { dispatchUser, user } = useAppContext()
         json.message === "Invalid token" ||
         json.message === "Unauthorized" 
       ) {
-        // Request for extending session
         const refUrl = "http://localhost:8000/api/users/extend";
         const refOptions = {
           method: "POST",
@@ -42,8 +37,6 @@ const { dispatchUser, user } = useAppContext()
           notify("Your session expired, please log in again")
           return;
         } else {
-          // New request
-            
           const newOptions = {
             ...options, headers: {
               "Content-type": "application/json; charset=UTF-8",
