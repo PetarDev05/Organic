@@ -7,7 +7,8 @@ const useUserAction = () => {
     };
 
     try {
-      const response = await fetch(url, options);
+      const newUrl = `https://organic-backend-x2bp.onrender.com/${url}`
+      const response = await fetch(newUrl, options);
       const json = await response.json();
       if (!response.ok) {
         return json.message;

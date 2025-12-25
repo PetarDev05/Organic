@@ -13,7 +13,7 @@ import { authMiddleware } from "../middlewares/authMiddleware.js";
 
 const router = express.Router();
 
-router.use(authMiddleware);
+// router.use(authMiddleware);
 
 router.get("/all", getAllProducts);
 router.get("/length/:userId", getCartLength)

@@ -10,18 +10,26 @@ const notify = (message) => toast(message);
 const Cart = () => {
   const [showAddress, setShowAddress] = useState(false);
   const authFetch = useAuthFetch();
-  const { user, cartProducts, setCartProducts, address, orders, setOrders, loadingUser } = useAppContext();
+  const {
+    user,
+    cartProducts,
+    setCartProducts,
+    address,
+    orders,
+    setOrders,
+    loadingUser,
+  } = useAppContext();
   const [price, setPrice] = useState(0);
 
   useEffect(() => {
     const getCart = async () => {
-    const url = `http://localhost:8000/api/products/${user.person._id}`;
-    const options = {
-      method: "GET",
+      const url = `/api/products/${user.person._id}`;
+      const options = {
+        method: "GET",
+      };
+      const json = await authFetch(url, options);
+      setCartProducts(json.data.cart);
     };
-    const json = await authFetch(url, options);
-    setCartProducts(json.data.cart);
-  };
     if (!user || !user.person._id) {
       return;
     }
@@ -29,27 +37,25 @@ const Cart = () => {
     if (!loadingUser && user) {
       getCart();
     }
-    
-  }, [user, loadingUser])
+  }, [user, loadingUser]);
 
   useEffect(() => {
-      const getTotalPrice = () => {
-        let amount = 0;
-        cartProducts.forEach((cartItem) => {      
-          amount += cartItem.productId.price * cartItem.quantity;
-        });
+    const getTotalPrice = () => {
+      let amount = 0;
+      cartProducts.forEach((cartItem) => {
+        amount += cartItem.productId.price * cartItem.quantity;
+      });
 
-        setPrice(amount);
-      }
+      setPrice(amount);
+    };
 
-      getTotalPrice()
-    }, [cartProducts])
+    getTotalPrice();
+  }, [cartProducts]);
 
   const handlePayment = async () => {
-
     if (!address.firstName) {
-      notify("No address provided")
-      return
+      notify("No address provided");
+      return;
     }
     let amount = 0;
     let items = [];
@@ -57,27 +63,25 @@ const Cart = () => {
       let newItem = {
         name: cartItem.productId.name,
         quantity: cartItem.quantity,
-      }
+      };
       amount += cartItem.productId.price * cartItem.quantity;
       items.push(newItem);
-    })
+    });
 
-    
-
-    const url = `http://localhost:8000/api/orders/${user.person._id}`;
+    const url = `/api/orders/${user.person._id}`;
     let options = {
       method: "POST",
-      body: JSON.stringify({address, items, amount}),
-    }   
+      body: JSON.stringify({ address, items, amount }),
+    };
 
     const data = await authFetch(url, options);
-    setOrders([...orders, data.createdOrder])
+    setOrders([...orders, data.createdOrder]);
     setCartProducts([]);
-    notify(data.message)
-  }
+    notify(data.message);
+  };
 
   const removeFromCart = async (productId) => {
-    const url = `http://localhost:8000/api/products/cart/${user.person._id}`;
+    const url = `/api/products/cart/${user.person._id}`;
     const options = {
       method: "PATCH",
       body: JSON.stringify({ productId }),
@@ -87,10 +91,6 @@ const Cart = () => {
     const newCart = cartProducts.filter((item) => item._id !== productId);
     setCartProducts(newCart);
   };
-
-
-
-
 
   return (
     <div className="flex flex-col md:flex-row py-16 max-w-6xl w-full px-6 mx-auto">
@@ -130,7 +130,9 @@ const Cart = () => {
                 </div>
               </div>
             </div>
-            <p className="text-center">${(product.productId.price / 100).toFixed(2)}</p>
+            <p className="text-center">
+              ${(product.productId.price / 100).toFixed(2)}
+            </p>
             <button
               onClick={() => removeFromCart(product._id)}
               className="cursor-pointer mx-auto"
@@ -171,7 +173,9 @@ const Cart = () => {
           <div className="mb-6">
             <p className="text-sm font-medium uppercase">Delivery Address</p>
             <div className="relative flex justify-between items-start mt-2">
-              <p className="text-gray-500">{address.street ? `${address.street}` : "No address found"}</p>
+              <p className="text-gray-500">
+                {address.street ? `${address.street}` : "No address found"}
+              </p>
               <button
                 onClick={() => setShowAddress(!showAddress)}
                 className="text-(--primary) hover:underline cursor-pointer"
@@ -197,10 +201,6 @@ const Cart = () => {
                 </div>
               )}
             </div>
-
-            
-
-            
           </div>
 
           <hr className="border-gray-300" />

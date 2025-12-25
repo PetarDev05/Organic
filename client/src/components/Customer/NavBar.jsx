@@ -14,19 +14,17 @@ const NavBar = () => {
     useAppContext();
   const [open, setOpen] = useState(false);
 
-
   const handleLogout = async () => {
-    const url = "http://localhost:8000/api/users/logout";
+    const url = "/api/users/logout";
     const options = {
       method: "POST",
-      credentials: "include"
+      credentials: "include",
     };
     const response = await fetch(url, options);
     const json = await response.json();
     dispatchUser({ type: "LOGOUT" });
     notify(json.message);
   };
-
 
   return (
     <nav className="flex items-center justify-between px-10 py-4 border-b border-gray-300 bg-white relative transition-all">
@@ -58,14 +56,12 @@ const NavBar = () => {
               </NavLink>
             )}
 
-            
-
             {user && (
-              <Link to="/cart" className="relative cursor-pointer max-lg:hidden">
-                <FaBasketShopping
-                  
-                  className="text-xl"
-                />
+              <Link
+                to="/cart"
+                className="relative cursor-pointer max-lg:hidden"
+              >
+                <FaBasketShopping className="text-xl" />
                 <button className="absolute -top-1 -right-2 text-xs text-white bg-(--primary) w-[18px] h-[18px] rounded-full">
                   {cartLength}
                 </button>
@@ -105,9 +101,7 @@ const NavBar = () => {
             <NavLink to="/orders">My orders</NavLink>
             <NavLink to="/products">All products</NavLink>
             <Link to="/cart" className="relative cursor-pointer">
-              <FaBasketShopping
-                className="text-xl"
-              />
+              <FaBasketShopping className="text-xl" />
               <button className="absolute -top-1 -right-2 text-xs text-white bg-(--primary) w-[18px] h-[18px] rounded-full">
                 {cartProducts.length}
               </button>

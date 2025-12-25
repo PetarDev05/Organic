@@ -11,7 +11,7 @@ const Details = ({ product }) => {
   const authFetch = useAuthFetch();
 
   const addToCart = async () => {
-    const url = `http://localhost:8000/api/products/${user.person._id}`;
+    const url = `/api/products/${user.person._id}`;
     const options = {
       method: "PATCH",
       body: JSON.stringify({ productId: product._id, quantity: 1 }),
@@ -33,7 +33,11 @@ const Details = ({ product }) => {
     <div className="w-full min-h-[70vh] flex items-center justify-center py-10">
       <div className="w-[300px] min-[500px]:w-[450px] lg:w-[900px] flex flex-col lg:flex-row  items-start gap-7 ">
         <div className="aspect-square w-full border border-(--details-border) flex items-center justify-center">
-          <img src={`/${product.image}`} alt={product.name} className="w-full h-full object-cover" />
+          <img
+            src={`/${product.image}`}
+            alt={product.name}
+            className="w-full h-full object-cover"
+          />
         </div>
         <div className="w-full flex flex-col items-start justify-center gap-5 px-3">
           <div className="">

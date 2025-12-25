@@ -12,7 +12,7 @@ const ProductCard = ({ product }) => {
   const authFetch = useAuthFetch();
 
   const addToCart = async () => {
-    const url = `http://localhost:8000/api/products/${user.person._id}`;
+    const url = `/api/products/${user.person._id}`;
     const options = {
       method: "PATCH",
       body: JSON.stringify({ productId: product._id, quantity: count }),

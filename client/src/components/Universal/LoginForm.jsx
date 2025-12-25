@@ -20,12 +20,10 @@ const LoginForm = () => {
 
     if (!email || !password) {
       notify("All fields must be filed");
-      return
+      return;
     }
 
-    const url = `http://localhost:8000/api/users/${
-      flag === "register" ? "signup" : "login"
-    }`;
+    const url = `/api/users/${flag === "register" ? "signup" : "login"}`;
 
     const body = {
       email,
@@ -35,7 +33,7 @@ const LoginForm = () => {
     if (flag === "register") {
       if (!name) {
         notify("All fields must be filed");
-        return 
+        return;
       }
       body.name = name;
     }

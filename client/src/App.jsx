@@ -24,39 +24,39 @@ import RootLayout from "./Layouts/RootLayout.jsx";
 const notify = (message) => toast(message);
 
 const App = () => {
-  const { 
-    dispatchProducts, 
-    dispatchUser, 
-    user, 
-    setLoadingUser, 
-    loadingUser, 
-    setCartLength, 
-    cartProducts, 
+  const {
+    dispatchProducts,
+    dispatchUser,
+    user,
+    setLoadingUser,
+    loadingUser,
+    setCartLength,
+    cartProducts,
   } = useAppContext();
   const authFetch = useAuthFetch();
 
   useEffect(() => {
     const getLength = async () => {
-      const url = `http://localhost:8000/api/products/length/${user.person._id}`;
+      const url = `/api/products/length/${user.person._id}`;
       const options = {
         method: "GET",
-      }
+      };
 
       const data = await authFetch(url, options);
-      setCartLength(data.cartLength)
-    }
+      setCartLength(data.cartLength);
+    };
 
     if (!loadingUser && user) {
       getLength();
     }
-  }, [loadingUser, user, cartProducts])
+  }, [loadingUser, user, cartProducts]);
 
   useEffect(() => {
     const fetchAllProducts = async () => {
-      const url = "http://localhost:8000/api/products/all";
+      const url = "/api/products/all";
       const options = {
         method: "GET",
-      }
+      };
       const data = await authFetch(url, options);
       dispatchProducts({
         type: "GET_ALL_PRODUCTS",
@@ -69,12 +69,10 @@ const App = () => {
     }
   }, [user, loadingUser]);
 
-  
-
   useEffect(() => {
     const extendSession = async () => {
       try {
-        const url = "http://localhost:8000/api/users/extend";
+        const url = "/api/users/extend";
         const options = {
           method: "POST",
           credentials: "include",
@@ -83,11 +81,11 @@ const App = () => {
         const json = await response.json();
         if (!response.ok) {
           dispatchUser({ type: "LOGOUT" });
-          setLoadingUser(false)
+          setLoadingUser(false);
           return;
         }
         dispatchUser({ type: "EXTEND_SESSION", payload: json });
-        setLoadingUser(false)
+        setLoadingUser(false);
       } catch (error) {
         notify(error.message);
         dispatchUser({ type: "LOGOUT" });
@@ -95,7 +93,7 @@ const App = () => {
       }
     };
 
-    extendSession()
+    extendSession();
   }, []);
 
   const router = createBrowserRouter(
@@ -104,15 +102,36 @@ const App = () => {
         <Route path="/" element={<RootLayout />}>
           <Route index element={<Home />} />
           <Route path="cart" element={!user ? <Navigate to="/" /> : <Cart />} />
-          <Route path="products" element={!user ? <Navigate to="/" /> : <Shop />} />
-          <Route path="details/:id" element={!user ? <Navigate to="/" /> : <ProductDetails />} />
-          <Route path="address" element={!user ? <Navigate to="/" /> : <AddressForm />} />
-          <Route path="orders" element={!user ? <Navigate to="/" /> : <Orders />} />
+          <Route
+            path="products"
+            element={!user ? <Navigate to="/" /> : <Shop />}
+          />
+          <Route
+            path="details/:id"
+            element={!user ? <Navigate to="/" /> : <ProductDetails />}
+          />
+          <Route
+            path="address"
+            element={!user ? <Navigate to="/" /> : <AddressForm />}
+          />
+          <Route
+            path="orders"
+            element={!user ? <Navigate to="/" /> : <Orders />}
+          />
         </Route>
         <Route path="/seller" element={<SellerLayout />}>
-          <Route index element={!user ? <Navigate to="/" /> : <ProductList />} />
-          <Route path="new" element={!user ? <Navigate to="/" /> : <NewProductForm />} />
-          <Route path="orders" element={!user ? <Navigate to="/" /> : <OrderList />} />
+          <Route
+            index
+            element={!user ? <Navigate to="/" /> : <ProductList />}
+          />
+          <Route
+            path="new"
+            element={!user ? <Navigate to="/" /> : <NewProductForm />}
+          />
+          <Route
+            path="orders"
+            element={!user ? <Navigate to="/" /> : <OrderList />}
+          />
         </Route>
       </>
     )
@@ -121,7 +140,7 @@ const App = () => {
   return (
     <>
       <RouterProvider router={router} />
-      <Toaster/>
+      <Toaster />
     </>
   );
 };

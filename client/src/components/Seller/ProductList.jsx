@@ -6,34 +6,33 @@ import { toast } from "react-hot-toast";
 const notify = (message) => toast(message);
 
 const ProductList = () => {
-  const {adminProducts, setAdminProducts, loadingUser, user} = useAppContext();
-  const authFetch = useAuthFetch()
+  const { adminProducts, setAdminProducts, loadingUser, user } =
+    useAppContext();
+  const authFetch = useAuthFetch();
 
   useEffect(() => {
     const getAllAdminProducts = async () => {
-      const url = "http://localhost:8000/api/products/admin/all";
+      const url = "/api/products/admin/all";
       const options = {
-        method: "GET"
-      }
+        method: "GET",
+      };
       const data = await authFetch(url, options);
       setAdminProducts(data.products);
-    }
+    };
 
     if (!loadingUser && user) {
       getAllAdminProducts();
     }
-
-  }, [loadingUser, user])
-
+  }, [loadingUser, user]);
 
   const manipulateStock = async (productId) => {
-    const url = `http://localhost:8000/api/products/stock/${productId}`;
+    const url = `/api/products/stock/${productId}`;
     const options = {
       method: "PATCH",
     };
     const data = await authFetch(url, options);
-    notify(data.message)
-  }
+    notify(data.message);
+  };
 
   return (
     <div className="flex-1 py-10 flex flex-col justify-between">
@@ -72,7 +71,7 @@ const ProductList = () => {
                         type="checkbox"
                         className="sr-only peer"
                         onClick={async () => {
-                          await manipulateStock(product._id)
+                          await manipulateStock(product._id);
                         }}
                         defaultChecked={product.inStock}
                       />
@@ -88,6 +87,6 @@ const ProductList = () => {
       </div>
     </div>
   );
-}
+};
 
-export default ProductList
+export default ProductList;

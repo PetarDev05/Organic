@@ -9,8 +9,7 @@ import { PiPackageBold } from "react-icons/pi";
 const notify = (message) => toast(message);
 
 const NavBarSideBar = () => {
-  const { dispatchUser } =
-    useAppContext();
+  const { dispatchUser } = useAppContext();
 
   const dashboardIcon = <HiOutlineRocketLaunch className="text-2xl" />;
   const newProductsIcon = <LuCircleFadingPlus className="text-2xl" />;
@@ -23,7 +22,7 @@ const NavBarSideBar = () => {
   ];
 
   const handleLogout = async () => {
-    const url = "http://localhost:8000/api/users/logout";
+    const url = "/api/users/logout";
     const options = {
       method: "POST",
       credentials: "include",

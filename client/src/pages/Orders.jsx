@@ -4,26 +4,25 @@ import { useAppContext } from "../context/AppContext.jsx";
 import useAuthFetch from "../hooks/useAuthFetch.jsx";
 
 const Orders = () => {
-  const {orders, setOrders, user} = useAppContext();
-  const authFetch = useAuthFetch()
+  const { orders, setOrders, user } = useAppContext();
+  const authFetch = useAuthFetch();
 
   useEffect(() => {
     const getAllOrders = async () => {
-      const url = `http://localhost:8000/api/orders/${user.person._id}`;
+      const url = `/api/orders/${user.person._id}`;
       const options = {
-        method: "GET"
-      }
+        method: "GET",
+      };
       const data = await authFetch(url, options);
       setOrders(data.orders);
-    }
+    };
 
-    getAllOrders()
-  }, [])
-  
+    getAllOrders();
+  }, []);
+
   return (
     <div className="px-10 min-h-[70vh] py-10 space-y-4">
       <h2 className="text-lg font-medium">Orders List</h2>
-
 
       {orders.map((order) => (
         <div
@@ -32,16 +31,15 @@ const Orders = () => {
         >
           <div className="md:w-fit flex gap-5 flex-row items-center justify-between">
             <BiPackage className="text-5xl" />
-            <div  className="flex flex-col justify-center">
+            <div className="flex flex-col justify-center">
               {order.items.map((item, index) => (
-                  <p key={index} className="font-medium flex flex-row items-center justify-between gap-5">
-                    {item.name}
-                    <span
-                      className="text-indigo-500"
-                    >
-                      x {item.quantity}
-                    </span>
-                  </p>
+                <p
+                  key={index}
+                  className="font-medium flex flex-row items-center justify-between gap-5"
+                >
+                  {item.name}
+                  <span className="text-indigo-500">x {item.quantity}</span>
+                </p>
               ))}
             </div>
           </div>
@@ -61,7 +59,6 @@ const Orders = () => {
           </p>
         </div>
       ))}
-
     </div>
   );
 };
