@@ -2,8 +2,8 @@ import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import productsRouter from "./src/routes/products.routes.js";
-import usersRouter from "./src/routes/users.routes.js"
-import ordersRouter from "./src/routes/orders.routes.js"
+import usersRouter from "./src/routes/users.routes.js";
+import ordersRouter from "./src/routes/orders.routes.js";
 
 export const app = express();
 
@@ -20,9 +20,9 @@ app.use(
 );
 
 app.use(cookieParser());
-app.use((req, res, next) => {
-  console.log(`Request method: ${req.method}\nRequest path: ${req.path}`);
-  next();
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ message: "Internal server error" });
 });
 
 app.use("/api/products", productsRouter);

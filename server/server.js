@@ -1,24 +1,18 @@
-// Dependencies
 import dotenv from "dotenv";
 import { app } from "./app.js";
 import { connectDB } from "./src/db/connect.db.js";
-
-// admin
 import { createAdmin } from "./src/utils/createAdmin.utils.js";
 
-// dotenv configuration
 dotenv.config({
   path: "./.env",
 });
 
-// PORT
 const port = process.env.PORT || 3000;
 
-// Connection
 connectDB()
   .then(() => {
     app.listen(port, () => {
-      console.log(`Server is listening on: http://localhost:${port}...`);
+      console.log(`Server is listening on port: ${port}...`);
     });
   })
   .then(async () => {
