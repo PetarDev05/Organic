@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import { consoleMiddleware } from "./src/middlewares/console.middlewares.js";
+import productsRouter from "./src/routes/products.routes.js";
 
 export const app = express();
 
@@ -15,4 +16,4 @@ app.use(
 );
 app.use(consoleMiddleware);
 
-
+app.use("/api/products", productsRouter);
