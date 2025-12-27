@@ -1,6 +1,7 @@
 import { BsCoin } from "react-icons/bs";
 import { TbTruckDelivery } from "react-icons/tb";
 import { SiCodefresh } from "react-icons/si";
+import { GoPackageDependents } from "react-icons/go";
 
 const Features = () => {
   return (
@@ -49,6 +50,19 @@ const Features = () => {
             </h3>
             <p className="text-sm text-slate-600">
               Unbeatable prices for premium products
+            </p>
+          </div>
+        </div>
+        <div className="flex flex-col text-center items-center justify-center rounded-xl p-6 border border-(--primary) gap-6 max-[500px]:w-full w-105">
+          <div className="p-6 aspect-square bg-(--light-green) rounded-full">
+            <GoPackageDependents className="text-2xl" />
+          </div>
+          <div className="space-y-2">
+            <h3 className="text-base font-semibold text-slate-700">
+              Simple ordering process
+            </h3>
+            <p className="text-sm text-slate-600">
+              Order in just a few clicks
             </p>
           </div>
         </div>
