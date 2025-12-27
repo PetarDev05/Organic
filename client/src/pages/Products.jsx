@@ -1,22 +1,10 @@
-import { useEffect, useState } from "react";
 import Tabs from "../components/Tabs.jsx";
 import SearchBar from "../components/SearchBar.jsx";
 import ProductCard from "../components/ProductsCard.jsx";
-import useFetch from "../hooks/useFetch.jsx";
+import useProductsContext from "../hooks/useProductsContext.jsx";
 
 const Products = () => {
-  const [products, setProducts] = useState([]);
-  const send = useFetch();
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-      const url = "http://localhost:8000/api/products/";
-      const products = await send(url);
-      setProducts(products);
-    };
-
-    fetchProducts();
-  }, []);
+  const { products } = useProductsContext();
 
   return (
     <div className="min-h-[95vh] flex flex-col items-center gap-10 p-5 sm:p-10">
