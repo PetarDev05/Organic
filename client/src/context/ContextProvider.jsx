@@ -6,13 +6,14 @@ const notify = (message) => toast(message);
 
 const ContextProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
+  const [category, setCategory] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   const [cart, setCart] = useState(() => {
     const savedCart = JSON.parse(localStorage.getItem("cart")) || [];
     return savedCart;
   });
-  const [category, setCategory] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+
   const fetchProducts = async (category = null, searchTerm = null) => {
     try {
       setLoading(true);
@@ -65,11 +66,15 @@ const ContextProvider = ({ children }) => {
     notify("Product added to cart");
   };
 
+  const removeFromCart = (itemId) => {
+    setCart((prev) => {
+      return [...prev].filter((item) => item.id !== itemId);
+    });
+  };
+
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
-
-  const removeFromCart = () => {};
 
   useEffect(() => {
     fetchProducts();
