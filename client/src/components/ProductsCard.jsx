@@ -1,14 +1,12 @@
 import { Link } from "react-router-dom";
 // import { toast } from "react-hot-toast";
-
 // const notify = (message) => toast(message);
 
 const ProductCard = ({ product }) => {
-
   return (
     <div className="border border-gray-500/20 rounded-md md:px-4 p-3 bg-white min-w-56 max-w-56 w-full">
       <Link
-        to={`/details/${product._id}`}
+        to={`/${product._id}`}
         className="aspect-square group cursor-pointer flex items-center justify-center px-2"
       >
         <img
@@ -59,11 +57,19 @@ const ProductCard = ({ product }) => {
             )}
           <p>({product.rating})</p>
         </div>
-        <div className="flex items-end justify-between mt-3">
+        <div className="flex items-center justify-between mt-3">
           <p className="md:text-xl text-base font-medium text-(--primary)">
             ${(product.price / 100).toFixed(2)}
           </p>
-          
+          <Link
+            to={`/${product._id}`}
+            className="py-0.75 px-2 border border-(--primary) text-(--primary) rounded"
+          >
+            details
+          </Link>
+          <button className="py-1 px-3 cursor-pointer rounded bg-(--primary) text-(--white)">
+            Buy
+          </button>
         </div>
       </div>
     </div>
