@@ -1,12 +1,18 @@
 import { useEffect, useState } from "react";
 import { Context } from "./Context.jsx";
+import { toast } from "react-hot-toast";
+
+const notify = (message) => toast(message);
 
 const ContextProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
+  const [cart, setCart] = useState(() => {
+    const savedCart = JSON.parse(localStorage.getItem("cart")) || [];
+    return savedCart;
+  });
   const [category, setCategory] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-
   const fetchProducts = async (category = null, searchTerm = null) => {
     try {
       setLoading(true);
@@ -31,6 +37,40 @@ const ContextProvider = ({ children }) => {
     }
   };
 
+  const addToCart = (product) => {
+    let savedCart = [...cart];
+    let matchingIndex = savedCart.findIndex((item) => item.id === product._id);
+
+    if (matchingIndex !== -1) {
+      savedCart[matchingIndex] = {
+        ...savedCart[matchingIndex],
+        quantity: savedCart[matchingIndex].quantity + 1,
+      };
+
+      setCart(savedCart);
+      notify("Product quantity updated");
+      return;
+    }
+
+    const newCartItem = {
+      id: product._id,
+      image: product.image,
+      name: product.name,
+      price: product.price,
+      quantity: 1,
+    };
+
+    savedCart = [...savedCart, newCartItem];
+    setCart(savedCart);
+    notify("Product added to cart");
+  };
+
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
+
+  const removeFromCart = () => {};
+
   useEffect(() => {
     fetchProducts();
   }, []);
@@ -42,6 +82,9 @@ const ContextProvider = ({ children }) => {
     setCategory,
     loading,
     error,
+    cart,
+    addToCart,
+    removeFromCart,
   };
 
   return <Context.Provider value={value}>{children}</Context.Provider>;

@@ -1,6 +1,6 @@
 import Tabs from "../components/Tabs.jsx";
 import SearchBar from "../components/SearchBar.jsx";
-import ProductCard from "../components/ProductsCard.jsx";
+import ProductCard from "../components/ProductCard.jsx";
 import useProductsContext from "../hooks/useProductsContext.jsx";
 
 const Products = () => {

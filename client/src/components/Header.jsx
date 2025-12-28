@@ -1,4 +1,4 @@
-import { NavLink, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { LuShoppingCart } from "react-icons/lu";
 import { ImLeaf } from "react-icons/im";
 import { RiMenu3Fill } from "react-icons/ri";
