@@ -21,7 +21,7 @@ const Newsletter = () => {
 
   return (
     <section className="flex flex-col items-center justify-center">
-      <h1 className="text-4xl md:text-5xl font-semibold text-(--text) mt-4 text-center">
+      <h1 className="text-3xl md:text-4xl font-semibold text-(--text) mt-4 text-center">
         Subscribe to our newsletter
       </h1>
       <p className="max-w-lg text-center text-(--text-light) mt-6">

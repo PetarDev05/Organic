@@ -13,10 +13,12 @@ const Products = () => {
         <SearchBar />
       </div>
       <div className="w-fit grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 place-items-center gap-7">
+        
         {products?.map((product, i) => (
           <ProductCard key={i} product={product} />
         ))}
       </div>
+      {!products.length && <p className="text-(--text-light) text-xl">No products found</p>}
     </div>
   );
 };

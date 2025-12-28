@@ -3,6 +3,7 @@ import { Context } from "./Context.jsx";
 
 const ContextProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
+  const [category, setCategory] = useState("");
 
   const fetchProducts = async (category = null, searchTerm = null) => {
     try {
@@ -31,6 +32,8 @@ const ContextProvider = ({ children }) => {
   const value = {
     products,
     fetchProducts,
+    category,
+    setCategory,
   };
 
   return <Context.Provider value={value}>{children}</Context.Provider>;
