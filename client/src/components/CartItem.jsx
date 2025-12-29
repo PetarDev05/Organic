@@ -5,7 +5,7 @@ const CartItem = ({ item }) => {
   const { removeFromCart } = useProductsContext();
 
   return (
-    <div className="w-full flex flex-row items-center justify-between p-1 pr-10 border border-(--text-light)/50 rounded-lg">
+    <div className="w-full max-w-120 flex flex-row items-center justify-between p-1 pr-10 border border-(--text-light)/50 rounded-lg">
       <div className="h-25 aspect-square">
         <img
           src={`/${item.image}`}

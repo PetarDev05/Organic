@@ -3,8 +3,10 @@ import { LuShoppingCart } from "react-icons/lu";
 import { ImLeaf } from "react-icons/im";
 import { RiMenu3Fill } from "react-icons/ri";
 import { useState } from "react";
+import useProductsContext from "../hooks/useProductsContext.jsx";
 
 const Header = () => {
+  const { cart } = useProductsContext();
   const [open, setOpen] = useState(false);
   return (
     <nav className="flex items-center justify-between px-6 md:px-16 lg:px-24 xl:px-32 py-4 border-b border-gray-300 bg-white relative transition-all">
@@ -22,8 +24,9 @@ const Header = () => {
         <NavLink to="/about">About us</NavLink>
         <NavLink to="/products">Products</NavLink>
 
-        <NavLink to="/checkout">
+        <NavLink className="relative p-2" to="/checkout">
           <LuShoppingCart className="text-2xl cursor-pointer" />
+          <p className="absolute top-0 -right-1 bg-(--primary) text-sm rounded-full px-1.5 text-(--white)">{cart.length}</p>
         </NavLink>
       </div>
 

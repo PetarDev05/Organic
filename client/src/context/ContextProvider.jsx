@@ -88,6 +88,7 @@ const ContextProvider = ({ children }) => {
     loading,
     error,
     cart,
+    setCart,
     addToCart,
     removeFromCart,
   };
