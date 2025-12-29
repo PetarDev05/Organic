@@ -6,7 +6,7 @@ const notify = (message) => toast(message);
 
 const Newsletter = () => {
   const [input, setInput] = useState("")
-  const notification = "You are added to newsletter program";
+  const notification = "You are added to the newsletter program";
 
   const subscribe = (e) => {
     e.preventDefault();
@@ -38,7 +38,7 @@ const Newsletter = () => {
           className="focus:outline-none pl-10 py-5 bg-transparent w-full"
           required
         />
-        <button type="submit" className="shrink-0 mr-2 px-6 py-3 text-sm bg-(--primary) rounded-md active:scale-95 transition duration-300 text-white">
+        <button type="submit" className="shrink-0 mr-2 px-6 py-3 text-sm bg-(--primary) rounded-md active:scale-95 transition duration-300 text-white cursor-pointer">
           Subscribe
         </button>
       </form>

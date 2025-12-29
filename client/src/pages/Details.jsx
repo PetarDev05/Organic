@@ -7,7 +7,7 @@ import { BsStar } from "react-icons/bs";
 
 const Details = () => {
   const { productId } = useParams();
-  const { products } = useProductsContext();
+  const { products, addToCart } = useProductsContext();
 
   if (!products.length) {
     return (
@@ -20,13 +20,13 @@ const Details = () => {
   const product = products?.find((product) => product._id === productId);
 
   return (
-    <div className="w-full p-5 sm:p-10 flex flex-col items-center gap-10">
+    <div className="w-full min-h-[80vh] p-5 sm:p-10 flex flex-col items-center justify-center gap-10">
       <div className="w-75 min-[500px]:w-112.5 lg:w-225 flex flex-col lg:flex-row  items-center gap-7 ">
-        <div className="aspect-square w-[90%] min-[500px]:w-full border border-(--details-border) flex items-center justify-center">
+        <div className="aspect-square w-[90%] min-[500px]:w-full border border-(--primary) flex items-center justify-center rounded-xl">
           <img
             src={`/${product.image}`}
             alt={product.name}
-            className="w-full h-full object-contain"
+            className="w-full h-full object-contain rounded-xl"
           />
         </div>
         <div className="w-full flex flex-col items-start justify-center gap-5 px-3">
@@ -69,14 +69,13 @@ const Details = () => {
               ))}
             </ul>
           </div>
-          <div className="w-full flex flex-row items-center gap-5">
-            <Link
+          <Link
+              onClick={() => addToCart(product)}
               to="/checkout"
-              className="text-(--white) flex-1 py-2 bg-(--primary) text-center rounded-md"
+              className="w-full text-(--white) flex-1 py-2 bg-(--primary) text-center rounded-sm cursor-pointer"
             >
               Buy now
             </Link>
-          </div>
           <Link
             to="/products"
             className="w-full text-(--primary) flex items-center gap-3"

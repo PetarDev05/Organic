@@ -1,5 +1,9 @@
 import { ImLeaf } from "react-icons/im";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import { BsInstagram } from "react-icons/bs";
+import { ImFacebook2 } from "react-icons/im";
+import { BsLinkedin } from "react-icons/bs";
+import { FaXTwitter } from "react-icons/fa6";
 
 const Footer = () => {
   return (
@@ -19,43 +23,33 @@ const Footer = () => {
         <div className="flex flex-col lg:items-center lg:justify-center text-center">
           <div className="flex flex-col text-sm space-y-2.5">
             <h2 className="font-semibold mb-5 text-(--text-dark)">Company</h2>
-            <a className="hover:text-slate-600 transition" href="#">
+            <Link className="hover:text-slate-600 transition" to="/about">
               About us
-            </a>
-            <a className="hover:text-slate-600 transition" href="#">
-              Careers
-            </a>
-            <a className="hover:text-slate-600 transition" href="#">
-              Contact us
-            </a>
-            <a className="hover:text-slate-600 transition" href="#">
-              Privacy policy
-            </a>
+            </Link>
+            <Link className="hover:text-slate-600 transition" to="/checkout">
+              Delivery information
+            </Link>
+            <Link className="hover:text-slate-600 transition" to="/checkout">
+              Payment methods
+            </Link>
+            <p className="hover:text-slate-600 transition">Privacy policy</p>
           </div>
         </div>
-        <div className="flex flex-col lg:items-center lg:justify-center text-center">
-          <div className="flex flex-col text-sm space-y-2.5">
-            <h2 className="font-semibold mb-5 text-(--text-dark)">
-              Need help?
-            </h2>
-            <a className="hover:text-slate-600 transition" href="#">
-              Delivery information
-            </a>
-            <a className="hover:text-slate-600 transition" href="#">
-              Payment methods
-            </a>
-            <a className="hover:text-slate-600 transition" href="#">
-              Track your order
-            </a>
-            <a className="hover:text-slate-600 transition" href="#">
-              Contact us
-            </a>
+        <div className="flex flex-col items-center justify-center text-center gap-2">
+          <h2 className="font-semibold mb-5 text-(--text-dark)">
+            Follow us on:
+          </h2>
+          <div className="flex flex-row items-center gap-3">
+            <BsInstagram className="text-xl " />
+            <ImFacebook2 className="text-xl " />
+            <BsLinkedin className="text-xl " />
+            <FaXTwitter className="text-xl " />
           </div>
         </div>
       </div>
       <p className="py-4 text-center border-t mt-6 border-slate-200">
-        Copyright 2026 &copy; <a href="https://prebuiltui.com">Organic</a> All Rights
-        Reserved.
+        Copyright 2026 &copy; <a href="https://prebuiltui.com">Organic.</a> All
+        Rights Reserved.
       </p>
     </footer>
   );

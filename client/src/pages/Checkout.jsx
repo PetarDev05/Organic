@@ -7,7 +7,7 @@ const Checkout = () => {
   const { cart } = useProductsContext();  
 
   return (
-    <div className="w-full min-h-[95vh] flex flex-col items-center gap-5 sm:gap-10 p-5 sm:p-10">
+    <div className="w-full min-h-[95vh] flex flex-col items-center gap-5 sm:gap-10 px-5 py-10 sm:px-10 sm:py-15">
       <div className="flex flex-row items-end gap-3">
         <h2 className="text-3xl text-(--text)">Checkout</h2>
         <p className="text-lg text-(--primary)">{cart.length} items</p>

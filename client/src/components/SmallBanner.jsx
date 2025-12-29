@@ -10,7 +10,7 @@ const SmallBanner = () => {
 
         <Link
           to="/products"
-          className="cursor-pointer px-8 py-2 bg-(--primary) hover:bg-(--primary-darker) transition text-white rounded-full"
+          className="cursor-pointer px-8 py-2 bg-(--primary) hover:bg-(--primary-darker) transition text-white rounded-md"
         >
           Shop now
         </Link>

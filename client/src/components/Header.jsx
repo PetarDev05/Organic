@@ -26,7 +26,9 @@ const Header = () => {
 
         <NavLink className="relative p-2" to="/checkout">
           <LuShoppingCart className="text-2xl cursor-pointer" />
-          <p className="absolute top-0 -right-1 bg-(--primary) text-sm rounded-full px-1.5 text-(--white)">{cart.length}</p>
+          <p className="absolute top-0 -right-1 bg-(--primary) text-sm rounded-full px-1.5 text-(--white)">
+            {cart.length}
+          </p>
         </NavLink>
       </div>
 
@@ -34,18 +36,46 @@ const Header = () => {
         onClick={() => (open ? setOpen(false) : setOpen(true))}
         className="sm:hidden"
       >
-        <RiMenu3Fill className="text-xl" />
+        <RiMenu3Fill className="text-xl cursor-pointer" />
       </button>
 
       {/* Mobile Menu */}
       <div
         className={`${
           open ? "flex" : "hidden"
-        } absolute top-15 left-0 w-full bg-white shadow-md py-4 flex-col items-start gap-2 px-5 text-sm sm:hidden`}
+        } absolute top-15 left-0 w-full bg-white shadow-md py-4 flex-col items-start gap-2 text-sm sm:hidden`}
       >
-        <NavLink to="/">Home</NavLink>
-        <NavLink to="/about">About us</NavLink>
-        <NavLink to="/products">Products</NavLink>
+        <NavLink
+          onClick={() => setOpen(false)}
+          className="w-full p-2 hover:text-(--white) hover:bg-(--primary)"
+          to="/"
+        >
+          Home
+        </NavLink>
+        <NavLink
+          onClick={() => setOpen(false)}
+          className="w-full p-2 hover:text-(--white) hover:bg-(--primary)"
+          to="/about"
+        >
+          About us
+        </NavLink>
+        <NavLink
+          onClick={() => setOpen(false)}
+          className="w-full p-2 hover:text-(--white) hover:bg-(--primary)"
+          to="/products"
+        >
+          Products
+        </NavLink>
+        <NavLink
+          className="relative p-2"
+          to="/checkout"
+          onClick={() => setOpen(false)}
+        >
+          <LuShoppingCart className="text-2xl cursor-pointer" />
+          <p className="absolute top-0 -right-1 bg-(--primary) text-sm rounded-full px-1.5 text-(--white)">
+            {cart.length}
+          </p>
+        </NavLink>
       </div>
     </nav>
   );
