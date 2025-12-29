@@ -10,7 +10,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
-    origin: "*",
+    origin: "https://organic-1-ow7z.onrender.com",
     allowedHeaders: "Content-type",
   })
 );
