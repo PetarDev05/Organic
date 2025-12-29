@@ -3,6 +3,7 @@ import { Context } from "./Context.jsx";
 import { toast } from "react-hot-toast";
 
 const notify = (message) => toast(message);
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 const ContextProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
@@ -21,7 +22,7 @@ const ContextProvider = ({ children }) => {
       if (category) params.append("category", category);
       if (searchTerm) params.append("searchTerm", searchTerm);
 
-      const url = `http://localhost:8000/api/products?${params.toString()}`;
+      const url = `${BACKEND_URL}/api/products?${params.toString()}`;
 
       const response = await fetch(url);
       if (!response.ok) {
