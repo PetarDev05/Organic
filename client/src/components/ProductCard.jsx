@@ -7,7 +7,10 @@ import { LuShoppingCart } from "react-icons/lu";
 import useProductsContext from "../hooks/useProductsContext.jsx";
 
 const ProductCard = ({ product }) => {
+  const { cart } = useProductsContext();
   const { addToCart } = useProductsContext();
+
+  const inCart = cart.some((item) => item.id === product._id);
 
   return (
     <div className="border border-gray-500/20 rounded-md md:px-4 p-3 bg-white min-w-56 max-w-56 w-full">
@@ -48,7 +51,7 @@ const ProductCard = ({ product }) => {
               className="py-0.75 px-2 border border-(--primary) text-(--primary) rounded cursor-pointer"
               onClick={() => addToCart(product)}
             >
-              <LuShoppingCart className="text-lg" />
+              {inCart ? "+ 1" : <LuShoppingCart className="text-lg" />}
             </button>
             <Link
               to="/checkout"
